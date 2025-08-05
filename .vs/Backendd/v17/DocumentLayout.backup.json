@@ -1,0 +1,1069 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\hubs\\videoprocessinghub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\hubs\\videoprocessinghub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\filefilter\\fileuploadfiller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\filefilter\\fileuploadfiller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\dbcnhom1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\dbcnhom1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\service\\videoprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\service\\videoprocessingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\logcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\streamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\streamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\subjectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\timetableforteachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\timetableforteachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\backendd.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\backendd.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\dtos\\dto_fileupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\dtos\\dto_fileupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\betaai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\betaai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\frontendd.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\frontendd.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\backendd.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\backendd.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\timetableforteacher.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\timetableforteacher.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\wwwroot\\css\\timetable.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\wwwroot\\css\\timetable.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\timetableforstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\timetableforstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\videostreaming.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\videostreaming.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\wwwroot\\css\\beta.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\wwwroot\\css\\beta.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\classmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\classmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\usermanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\usermanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\schedulemanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\schedulemanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\subjectmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\subjectmanage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\dtos\\dto_unknown_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\dtos\\dto_unknown_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\dtos\\dto_class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\dtos\\dto_class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\tbllog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\tbllog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\shared\\_layout_school.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\shared\\_layout_school.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\home\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\home\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\tbljwtblacklist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\tbljwtblacklist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\controllers\\schoolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\controllers\\schoolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\tblclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\tblclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\tblschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\tblschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\modelfromdb\\tblsubject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\modelfromdb\\tblsubject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\views\\school\\usermanage.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\views\\school\\usermanage.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\backendd\\dtos\\dto_createuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06B328EF-130C-429A-B613-268F1F9BD3B8}|Backendd\\Backendd.csproj|solutionrelative:backendd\\dtos\\dto_createuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|c:\\users\\baoph\\documents\\attendance_app\\ai_attendance\\frontendd\\models\\tblcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F95621C6-3E3A-46F1-BA9A-E2DD496B793F}|Frontendd\\Frontendd.csproj|solutionrelative:frontendd\\models\\tblcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Class\\_IndexPartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\User\\_IndexPartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ScheduleController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index_school.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\SubjectController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\AccountController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ClassController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\DTOs\\ScheduleViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 222,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "SubjectManage.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\SubjectManage.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\SubjectManage.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\SubjectManage.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\School\\SubjectManage.cshtml",
+              "ViewState": "AgIAAOUBAAAAAAAAAAAlwPABAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T07:01:41.599Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ScheduleManage.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\ScheduleManage.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\ScheduleManage.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\ScheduleManage.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\School\\ScheduleManage.cshtml",
+              "ViewState": "AgIAAOoFAAAAAAAAAAAmwPMFAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T07:01:56.546Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "UserManage.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\UserManage.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\UserManage.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\UserManage.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\School\\UserManage.cshtml",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAnwJgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T03:51:59.64Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ClassManage.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\ClassManage.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\ClassManage.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\ClassManage.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\School\\ClassManage.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAIBZwB4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T07:17:12.443Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FileUploadFiller.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\FileFilter\\FileUploadFiller.cs",
+              "RelativeDocumentMoniker": "Backendd\\FileFilter\\FileUploadFiller.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\FileFilter\\FileUploadFiller.cs",
+              "RelativeToolTip": "Backendd\\FileFilter\\FileUploadFiller.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:43:53.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VideoProcessingHub.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Hubs\\VideoProcessingHub.cs",
+              "RelativeDocumentMoniker": "Backendd\\Hubs\\VideoProcessingHub.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Hubs\\VideoProcessingHub.cs",
+              "RelativeToolTip": "Backendd\\Hubs\\VideoProcessingHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:43:55.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DBCnhom1.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\DBCnhom1.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\DBCnhom1.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\DBCnhom1.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\DBCnhom1.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:12:16.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "VideoProcessingService.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Service\\VideoProcessingService.cs",
+              "RelativeDocumentMoniker": "Backendd\\Service\\VideoProcessingService.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Service\\VideoProcessingService.cs",
+              "RelativeToolTip": "Backendd\\Service\\VideoProcessingService.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAuwFoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:44:06.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LogController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\LogController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\LogController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\LogController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\LogController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T09:35:47.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "StreamController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\StreamController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\StreamController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\StreamController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\StreamController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T20:21:20.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SubjectController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\SubjectController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\SubjectController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\SubjectController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\SubjectController.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAowHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:53:29.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TimeTableForTeacherController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\TimeTableForTeacherController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\TimeTableForTeacherController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\TimeTableForTeacherController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\TimeTableForTeacherController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAArwCwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:09:54.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T18:47:14.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "VideoController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\VideoController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\VideoController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\VideoController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\VideoController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T05:09:11.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\ClassController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\ClassController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAuwGAAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:52:58.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Backendd\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Backendd\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAIwIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T09:33:00.758Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Program.cs",
+              "RelativeDocumentMoniker": "Backendd\\Program.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Program.cs",
+              "RelativeToolTip": "Backendd\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:13:38.479Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Backendd.http",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Backendd.http",
+              "RelativeDocumentMoniker": "Backendd\\Backendd.http",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Backendd.http",
+              "RelativeToolTip": "Backendd\\Backendd.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-04-06T22:17:16.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Backendd\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\appsettings.Development.json",
+              "RelativeToolTip": "Backendd\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-05T12:31:36.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\appsettings.json",
+              "RelativeDocumentMoniker": "Frontendd\\appsettings.json",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\appsettings.json",
+              "RelativeToolTip": "Frontendd\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-06T20:10:34.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\appsettings.json",
+              "RelativeDocumentMoniker": "Backendd\\appsettings.json",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\appsettings.json",
+              "RelativeToolTip": "Backendd\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-06T20:10:24.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Program.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Program.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Program.cs",
+              "RelativeToolTip": "Frontendd\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:02:20.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DTO_FileUpload.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_FileUpload.cs",
+              "RelativeDocumentMoniker": "Backendd\\DTOs\\DTO_FileUpload.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_FileUpload.cs",
+              "RelativeToolTip": "Backendd\\DTOs\\DTO_FileUpload.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T06:56:03.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAIBJwA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T09:06:42.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Frontendd\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAADwvxoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T09:48:50.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BetaAI.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\BetaAI.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\BetaAI.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\BetaAI.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\BetaAI.cshtml",
+              "ViewState": "AgIAACICAAAAAAAAAAAuwFICAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-08T08:16:13.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Frontendd.csproj",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Frontendd.csproj",
+              "RelativeDocumentMoniker": "Frontendd\\Frontendd.csproj",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Frontendd.csproj",
+              "RelativeToolTip": "Frontendd\\Frontendd.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-06T18:29:35.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Backendd.csproj",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Backendd.csproj",
+              "RelativeDocumentMoniker": "Backendd\\Backendd.csproj",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\Backendd.csproj",
+              "RelativeToolTip": "Backendd\\Backendd.csproj",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwAoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-06T18:31:55.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TimeTableForTeacher.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\TimeTableForTeacher.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\TimeTableForTeacher.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\TimeTableForTeacher.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\TimeTableForTeacher.cshtml",
+              "ViewState": "AgIAAE0CAAAAAAAAAAAgwIECAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T11:13:50.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "timetable.css",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\timetable.css",
+              "RelativeDocumentMoniker": "Frontendd\\wwwroot\\css\\timetable.css",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\timetable.css",
+              "RelativeToolTip": "Frontendd\\wwwroot\\css\\timetable.css",
+              "ViewState": "AgIAAPQAAAAAAAAAAAAQwCEBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-09T11:15:59.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T09:07:55.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "TimeTableForStudent.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\TimeTableForStudent.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\TimeTableForStudent.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\TimeTableForStudent.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\TimeTableForStudent.cshtml",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAQwKYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T12:08:32.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Frontendd\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Frontendd\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAEgAAAAAAAAAAIBZwGAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-22T07:46:03.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAALABAAAAAAAAAAAswM8BAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T14:02:28.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "VideoStreaming.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\VideoStreaming.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\VideoStreaming.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\VideoStreaming.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\VideoStreaming.cshtml",
+              "ViewState": "AgIAABoBAAAAAAAAAAAswDgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T14:49:29.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "login.css",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\login.css",
+              "RelativeDocumentMoniker": "Frontendd\\wwwroot\\css\\login.css",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\login.css",
+              "RelativeToolTip": "Frontendd\\wwwroot\\css\\login.css",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAlwDEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-08T08:16:23.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "About.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\About.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\About.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\About.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\About.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-06T18:58:20.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "beta.css",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\beta.css",
+              "RelativeDocumentMoniker": "Frontendd\\wwwroot\\css\\beta.css",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\wwwroot\\css\\beta.css",
+              "RelativeToolTip": "Frontendd\\wwwroot\\css\\beta.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-09T11:16:12.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T09:08:06.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DTO_Unknown_Log.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_Unknown_Log.cs",
+              "RelativeDocumentMoniker": "Backendd\\DTOs\\DTO_Unknown_Log.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_Unknown_Log.cs",
+              "RelativeToolTip": "Backendd\\DTOs\\DTO_Unknown_Log.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T09:31:51.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "DTO_Class.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_Class.cs",
+              "RelativeDocumentMoniker": "Backendd\\DTOs\\DTO_Class.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_Class.cs",
+              "RelativeToolTip": "Backendd\\DTOs\\DTO_Class.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T09:04:34.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "TblLog.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblLog.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\TblLog.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblLog.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\TblLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T09:30:41.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "_Layout_School.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Shared\\_Layout_School.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Shared\\_Layout_School.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Shared\\_Layout_School.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Shared\\_Layout_School.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAIBZwH8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T09:12:06.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Frontendd\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T09:48:59.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\Index.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\Index.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\Index.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\School\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-09T09:09:01.874Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Contact.cshtml",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\Contact.cshtml",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\Home\\Contact.cshtml",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\Home\\Contact.cshtml",
+              "RelativeToolTip": "Frontendd\\Views\\Home\\Contact.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAuwDwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-06T19:14:25.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "TblJwtblacklist.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblJwtblacklist.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\TblJwtblacklist.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblJwtblacklist.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\TblJwtblacklist.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBYAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T07:24:22.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "SchoolController.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\SchoolController.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Controllers\\SchoolController.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Controllers\\SchoolController.cs",
+              "RelativeToolTip": "Frontendd\\Controllers\\SchoolController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwB0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:27:56.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "TblClass.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblClass.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\TblClass.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblClass.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\TblClass.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAqwBcAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:54:31.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "TblSchedule.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblSchedule.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\TblSchedule.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblSchedule.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\TblSchedule.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAUwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T10:01:31.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "TblSubject.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblSubject.cs",
+              "RelativeDocumentMoniker": "Backendd\\ModelFromDB\\TblSubject.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\ModelFromDB\\TblSubject.cs",
+              "RelativeToolTip": "Backendd\\ModelFromDB\\TblSubject.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBAAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T10:23:20.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "_IndexPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Class\\_IndexPartial.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Class\\_IndexPartial.cshtml",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Class\\_IndexPartial.cshtml",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Class\\_IndexPartial.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T08:49:48.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "UserManage.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\UserManage.cshtml.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Views\\School\\UserManage.cshtml.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Views\\School\\UserManage.cshtml.cs",
+              "RelativeToolTip": "Frontendd\\Views\\School\\UserManage.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T03:55:02.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "DTO_CreateUser.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_CreateUser.cs",
+              "RelativeDocumentMoniker": "Backendd\\DTOs\\DTO_CreateUser.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Backendd\\DTOs\\DTO_CreateUser.cs",
+              "RelativeToolTip": "Backendd\\DTOs\\DTO_CreateUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T08:27:45.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "_IndexPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\User\\_IndexPartial.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\User\\_IndexPartial.cshtml",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\User\\_IndexPartial.cshtml",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\User\\_IndexPartial.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-06T20:51:22.232Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ScheduleController.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ScheduleController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ScheduleController.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ScheduleController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ScheduleController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T20:20:50.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Index_school.cshtml",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index_school.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index_school.cshtml",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index_school.cshtml",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index_school.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-06T20:30:27.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "SubjectController.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\SubjectController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\SubjectController.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\SubjectController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\SubjectController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T22:19:50.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\HomeController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T22:19:40.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\AccountController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T22:19:39.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ClassController.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Controllers\\ClassController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T22:19:38.681Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\Views\\Home\\Index.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-06T20:34:25.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Frontendd\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T20:34:06.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "TblCamera.cs",
+              "DocumentMoniker": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Models\\TblCamera.cs",
+              "RelativeDocumentMoniker": "Frontendd\\Models\\TblCamera.cs",
+              "ToolTip": "C:\\Users\\baoph\\Documents\\Attendance_App\\AI_Attendance\\Frontendd\\Models\\TblCamera.cs",
+              "RelativeToolTip": "Frontendd\\Models\\TblCamera.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T20:34:03.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "ScheduleViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\DTOs\\ScheduleViewModel.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\DTOs\\ScheduleViewModel.cs",
+              "ToolTip": "C:\\Users\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\DTOs\\ScheduleViewModel.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Linh\\Desktop\\Web\\AttendanceSystem\\AttendanceFront2\\DTOs\\ScheduleViewModel.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:58:39.107Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

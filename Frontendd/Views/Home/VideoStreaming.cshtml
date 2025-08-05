@@ -1,0 +1,312 @@
+﻿@model Frontendd.Models.TblCamera
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Stream";
+
+    // Đường dẫn HLS mặc định: "mywebcam"
+    var streamUrl = "http://localhost:8080/hls/mywebcam.m3u8";
+}
+
+<!-- Phần bọc ngoài để tránh sidebar -->
+<div class="container"
+     style="margin-left: 270px;
+            margin-top: 80px;
+            margin-bottom: 20px;
+            max-width: calc(100% - 280px);">
+
+    <!-- Nền trắng, bo góc, đổ bóng -->
+    <div class="bg-white p-4"
+         style="border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+
+        <h2 class="text-center mb-4 pb-2 border-bottom border-primary">Điểm Danh Tự Động AI</h2>
+
+        <!-- Row chia cột camera - danh sách, chiều cao 60vh -->
+        <div class="row" style="height: 60vh;">
+            <!-- Cột camera -->
+            <div class="col-lg-8 d-flex flex-column">
+                <!-- Thêm style position: relative để canvas overlay -->
+                <div class="camera-placeholder position-relative flex-grow-1"
+                     id="cameraPlaceholder" style="position: relative;">
+                    <i class="fas fa-camera"></i>
+                    <p>Khu vực camera</p>
+
+                    <!-- Video HLS -->
+                    <video id="video" controls
+                           style="width: 100%;
+                                  height: 100%;
+                                  object-fit: cover;
+                                  display: none;"></video>
+
+                    <!-- Canvas overlay bounding box -->
+                    <canvas id="overlayCanvas"
+                            style="position: absolute;
+                                   top: 0;
+                                   left: 0;
+                                   width: 100%;
+                                   height: 100%;
+                                   pointer-events: none;
+                                   display: none;"></canvas>
+                </div>
+            </div>
+
+            <!-- Cột danh sách điểm danh -->
+            <div class="col-lg-4 d-flex flex-column">
+                <div class="card flex-grow-1">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Danh sách điểm danh</h5>
+                    </div>
+                    <div class="card-body p-0 overflow-auto" style="flex-grow: 1;">
+                        <div class="attendance-list list-group list-group-flush" id="aiAttendanceList">
+                            <div class="text-center p-4 text-muted" id="noStudentMessage">
+                                <p>Chưa có sinh viên được nhận diện</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút Khởi Động & Dừng Camera & Lưu Danh Sách -->
+        <div class="d-flex justify-content-between mt-3">
+            <div>
+                <button class="btn btn-success me-2" id="startCameraBtn">
+                    <i class="fas fa-video me-2"></i> Khởi Động Camera
+                </button>
+                <button class="btn btn-danger" id="stopCameraBtn">
+                    <i class="fas fa-stop me-2"></i> Dừng Camera
+                </button>
+            </div>
+            <button class="btn btn-primary" id="saveAttendanceBtn">
+                <i class="fas fa-save me-2"></i> Lưu Danh Sách
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- HLS.js (phát HLS trên browser) -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <script>
+        // URL HLS, streamKey = "mywebcam"
+        const streamUrl       = "@streamUrl";
+        // API .NET để Start/Stop webcam
+        const startWebcamApi  = "http://localhost:5243/Stream/start-webcam";
+        const stopStreamApi   = "http://localhost:5243/Stream/stop-stream";
+
+        // DOM elements
+        const video             = document.getElementById('video');
+        const startCameraBtn    = document.getElementById('startCameraBtn');
+        const stopCameraBtn     = document.getElementById('stopCameraBtn');
+        const saveAttendanceBtn = document.getElementById('saveAttendanceBtn');
+        const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+        const noStudentMessage  = document.getElementById('noStudentMessage');
+        const aiAttendanceList  = document.getElementById('aiAttendanceList');
+
+        // Canvas overlay
+        const overlayCanvas = document.getElementById('overlayCanvas');
+        const overlayCtx    = overlayCanvas.getContext('2d');
+
+        // =========================
+        // 1) Khởi Động Camera
+        // =========================
+        startCameraBtn.addEventListener('click', function() {
+            // Gọi API start-webcam => server chạy ffmpeg
+            fetch(startWebcamApi, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    camHttpUrl: 'dshow://video=HD Webcam',
+                    camStreamKey: 'mywebcam'
+                })
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const txt = await res.text();
+                    throw new Error(txt || "Start webcam failed");
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log("Start webcam success:", data);
+
+                // Ẩn icon + text => Hiện video
+                const icon = cameraPlaceholder.querySelector('i');
+                const text = cameraPlaceholder.querySelector('p');
+                if (icon) icon.style.display = 'none';
+                if (text) text.style.display = 'none';
+                video.style.display = 'block';
+
+                // Sau khi server OK => Poll .m3u8
+                waitForHlsFile(streamUrl, 20, 3000, () => {
+                    console.log("HLS file ready, let's play!");
+                    playHlsStream();
+                }, (errMsg) => {
+                    alert("Không tìm thấy file HLS: " + errMsg);
+                });
+            })
+            .catch(err => {
+                alert("Không thể start webcam: " + err.message);
+            });
+        });
+
+        // =========================
+        // 2) Hàm poll chờ file .m3u8 xuất hiện
+        // =========================
+        function waitForHlsFile(hlsUrl, maxAttempts, intervalMs, onSuccess, onFail) {
+            let attempts = 0;
+
+            function checkFile() {
+                // Gọi HEAD để xem file .m3u8 có sẵn chưa
+                fetch(hlsUrl, { method: 'HEAD' })
+                    .then(res => {
+                        if (res.ok) {
+                            // Tìm thấy file => thành công
+                            onSuccess();
+                        } else {
+                            // 404 hoặc lỗi => thử tiếp
+                            attempts++;
+                            if (attempts < maxAttempts) {
+                                setTimeout(checkFile, intervalMs);
+                            } else {
+                                onFail("File not found after " + maxAttempts + " attempts");
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        // Lỗi mạng => vẫn thử lại
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            setTimeout(checkFile, intervalMs);
+                        } else {
+                            onFail(err.message);
+                        }
+                    });
+            }
+
+            checkFile();
+        }
+
+        // =========================
+        // 3) Phát HLS
+        // =========================
+        function playHlsStream() {
+            // Hiện canvas overlay
+            overlayCanvas.style.display = 'block';
+
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    video.play().catch(e => console.error("Play error:", e));
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error("HLS error:", data);
+                    alert("Không thể kết nối stream HLS. Kiểm tra server / URL.");
+                });
+            }
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Safari/iOS
+                video.src = streamUrl;
+                video.addEventListener('loadedmetadata', () => {
+                    video.play().catch(e => console.error("Play error:", e));
+                });
+                video.addEventListener('error', () => {
+                    alert("Không thể kết nối stream. Kiểm tra server / URL.");
+                });
+            }
+            else {
+                alert("Trình duyệt không hỗ trợ HLS.");
+            }
+        }
+
+        // =========================
+        // 4) Dừng Camera
+        // =========================
+        stopCameraBtn.addEventListener('click', function() {
+            // Gọi API stop-stream => server kill ffmpeg
+            fetch(stopStreamApi, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    camStreamKey: 'mywebcam'
+                })
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const txt = await res.text();
+                    throw new Error(txt || "Stop stream failed");
+                }
+                return res.text();
+            })
+            .then(msg => {
+                console.log("Stop stream:", msg);
+                alert("Đã dừng stream");
+
+                // Tắt video phía client
+                video.pause();
+                video.style.display = 'none';
+
+                // Ẩn canvas overlay
+                overlayCanvas.style.display = 'none';
+                // Xoá nội dung cũ (nếu có)
+                overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+                // Hiện icon + text
+                const icon = cameraPlaceholder.querySelector('i');
+                const text = cameraPlaceholder.querySelector('p');
+                if (icon) icon.style.display = 'block';
+                if (text) text.style.display = 'block';
+            })
+            .catch(err => {
+                alert("Không thể dừng webcam: " + err.message);
+            });
+        });
+
+        // =========================
+        // 5) Lưu Danh Sách (demo)
+        // =========================
+        saveAttendanceBtn.addEventListener('click', () => {
+            alert("Đã lưu danh sách điểm danh thành công!");
+        });
+
+
+        // =========================
+        // 6) Demo: WebSocket (hoặc SSE) để nhận bounding box
+        // =========================
+        // => KHÔNG thay đổi logic .NET sẵn có, chỉ minh hoạ overlay
+        const wsUrl = "ws://localhost:5243/ai/ws"; // ví dụ
+        let ws;
+
+        try {
+            ws = new WebSocket(wsUrl);
+            ws.onopen = () => console.log("WebSocket connected");
+            ws.onmessage = event => {
+                // Giả sử server gửi JSON: { "boxes": [ {x,y,w,h,label}, ... ] }
+                const data = JSON.parse(event.data);
+                const boxes = data.boxes || [];
+
+                // Xoá canvas cũ
+                overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+                // Vẽ bounding box
+                boxes.forEach(box => {
+                    overlayCtx.strokeStyle = "red";
+                    overlayCtx.lineWidth = 2;
+                    overlayCtx.strokeRect(box.x, box.y, box.w, box.h);
+
+                    overlayCtx.fillStyle = "red";
+                    overlayCtx.font = "16px Arial";
+                    overlayCtx.fillText(box.label, box.x, box.y - 5);
+                });
+            };
+            ws.onerror = e => console.error("WS error", e);
+            ws.onclose = () => console.log("WS closed");
+        } catch (err) {
+            console.error("Cannot connect WebSocket", err);
+        }
+    </script>
+}

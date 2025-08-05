@@ -1,0 +1,595 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video - Beta AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/beta.css" asp-append-version="true">
+    <style>
+        .warning-alert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 4px;
+        }
+
+            .warning-alert i {
+                margin-right: 8px;
+            }
+
+        .log-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+        }
+
+            .log-section input {
+                padding: 5px;
+                margin-left: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+        .btn-warning {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-warning:hover {
+                background-color: #e68900;
+            }
+    </style>
+</head>
+<body>
+    <div class="main-content video-streaming-container active">
+        <div class="page-header">
+            <h1 class="page-title">Upload Video</h1>
+            <div class="breadcrumb">
+                <span>Trang chủ</span>
+                <span>Upload Video</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <div class="upload-container" id="uploadContainer">
+                    <div class="loader" id="uploaderLoader"></div>
+                    <form id="videoUploadForm">
+                        <div class="file-input-wrapper">
+                            <label class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt file-input-icon"></i>
+                                <span class="file-input-text">Chọn file video để upload</span>
+                                <span class="file-input-text" id="fileNameDisplay">Chưa có file nào được chọn</span>
+                                <input type="file" id="videoFile" name="video" accept="video/*" class="file-input">
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="uploadBtn">
+                            <i class="fas fa-upload"></i> Upload Video
+                        </button>
+                    </form>
+                </div>
+
+                <div class="video-preview-container">
+                    <video id="videoPreview" class="video-preview" controls></video>
+                </div>
+
+                <div class="progress-bar-container" id="progressContainer">
+                    <div class="progress-label">
+                        <span>Uploading video...</span>
+                        <span class="progress-status" id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card attendance-card" id="attendanceSection" style="display: none;">
+                <div class="attendance-header">
+                    <h2 class="section-title">Điểm danh tự động</h2>
+                    <div class="schedule-id">
+                        <i class="fas fa-calendar-check"></i>
+                        Schedule ID: <span id="scheduleIdDisplay"></span>
+                    </div>
+                </div>
+
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ và tên</th>
+                            <th style="text-align: center;">Có mặt</th>
+                            <th style="text-align: center;">Vắng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+
+                <div class="warning-alert" id="warningAlert" style="display: none;">
+                    <div>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="warningMessage"></span>
+                    </div>
+                </div>
+
+                <div class="log-section">
+                    <div>
+                        <label for="logPhoneInput">Số điện thoại:</label>
+                        <input type="text" id="logPhoneInput" placeholder="Nhập số điện thoại">
+                    </div>
+                    <button class="btn btn-warning" onclick="saveLog()">
+                        <i class="fas fa-save"></i> Lưu Log
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="recheckAttendance()">
+                        <i class="fas fa-redo"></i> Kết Quả Điểm Danh
+                    </button>
+                    <button class="btn btn-primary" onclick="submitAttendance()">
+                        <i class="fas fa-check"></i> Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification" id="notification">
+            <span id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
+    <script>
+        // SignalR Connection Setup
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5243/videoProcessingHub", { withCredentials: true })
+            .withAutomaticReconnect()
+            .build();
+
+        function startConnection() {
+            connection.start()
+                .then(() => console.log("SignalR Connected."))
+                .catch(err => {
+                    console.error("SignalR Connection Error: ", err);
+                    setTimeout(startConnection, 2000);
+                });
+        }
+        startConnection();
+
+        connection.onclose(err => {
+            console.error("SignalR Connection Closed: ", err);
+            showNotification("Mất kết nối với server. Đang thử kết nối lại...", "error");
+            startConnection();
+        });
+
+        connection.on("ReceiveProcessingResult", function(jsonResponse) {
+            localStorage.setItem("processingResult", jsonResponse);
+            localStorage.setItem("processingResultTimestamp", Date.now().toString());
+            console.log("JSON saved to localStorage:", jsonResponse);
+            localStorage.removeItem("videoId");
+            processSignalRResult();
+            showNotification("Kết quả điểm danh đã được xử lý!", "success");
+        });
+
+        // DOM Elements
+        const videoFileInput = document.getElementById('videoFile');
+        const videoPreview = document.getElementById('videoPreview');
+        const videoUploadForm = document.getElementById('videoUploadForm');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const attendanceSection = document.getElementById('attendanceSection');
+        const scheduleIdDisplay = document.getElementById('scheduleIdDisplay');
+        const attendanceTableBody = document.getElementById('attendanceTableBody');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const uploaderLoader = document.getElementById('uploaderLoader');
+        const logPhoneInput = document.getElementById('logPhoneInput');
+
+        // Biến để lưu danh sách sinh viên
+        let students = [];
+
+        // File Input Change Event
+        videoFileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                videoPreview.src = fileURL;
+                videoPreview.style.display = 'block';
+                fileNameDisplay.textContent = file.name;
+            } else {
+                videoPreview.style.display = 'none';
+                fileNameDisplay.textContent = "Chưa có file nào được chọn";
+            }
+        });
+
+        // Form Submit Event
+        videoUploadForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const file = videoFileInput.files[0];
+            if (!file) {
+                showNotification("Vui lòng chọn file video trước khi upload.", "error");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("video", file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:5243/api/VideoUpload/upload", true);
+
+            progressContainer.style.display = 'block';
+            uploaderLoader.style.display = 'block';
+
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    const percentComplete = Math.round((e.loaded / e.total) * 100);
+                    progressFill.style.width = `${percentComplete}%`;
+                    progressPercent.textContent = `${percentComplete}%`;
+                }
+            };
+
+            xhr.onload = function() {
+                progressContainer.style.display = 'none';
+                uploaderLoader.style.display = 'none';
+
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const videoId = response.videoId;
+                    const scheduleId = response.scheduleId || localStorage.getItem('scheduleId');
+                    localStorage.setItem('videoId', videoId);
+                    localStorage.setItem('scheduleId', scheduleId);
+
+                    if (connection.state === signalR.HubConnectionState.Connected) {
+                        connection.invoke("JoinGroup", videoId)
+                            .then(() => console.log(`Joined group ${videoId}`))
+                            .catch(err => console.error("JoinGroup Error: ", err));
+                    } else {
+                        connection.start().then(() => {
+                            connection.invoke("JoinGroup", videoId)
+                                .then(() => console.log(`Joined group ${videoId}`))
+                                .catch(err => console.error("JoinGroup Error: ", err));
+                        });
+                    }
+
+                    showNotification("Video đã được upload thành công! Đang chờ xử lý...", "success");
+                    videoUploadForm.reset();
+                    videoPreview.style.display = 'none';
+                    videoPreview.src = '';
+                    fileNameDisplay.textContent = "Chưa có file nào được chọn";
+
+                    loadAttendanceData();
+                } else {
+                    showNotification(`Upload thất bại: ${xhr.statusText}`, "error");
+                    console.error("Error:", xhr.responseText);
+                }
+            };
+
+            xhr.onerror = function() {
+                progressContainer.style.display = 'none';
+                uploaderLoader.style.display = 'none';
+                showNotification("Đã xảy ra lỗi mạng khi upload video.", "error");
+            };
+
+            xhr.send(formData);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkForExistingData();
+            setInterval(checkAndClearLocalStorage, 60000);
+        });
+
+        function checkForExistingData() {
+            const scheduleId = localStorage.getItem('scheduleId');
+            if (scheduleId) {
+                loadAttendanceData();
+            }
+        }
+
+        function loadAttendanceData() {
+            const scheduleId = localStorage.getItem('scheduleId');
+            if (!scheduleId) {
+                console.error("No ScheduleId found in localStorage.");
+                return;
+            }
+
+            scheduleIdDisplay.textContent = scheduleId;
+            attendanceSection.style.display = 'block';
+
+            fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/${scheduleId}/students`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Lỗi khi lấy danh sách sinh viên: " + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                students = data.map(student => ({
+                    us_id: student.us_id,
+                    fullName: student.fullName,
+                    isPresent: student.isArrive || false,
+                    isAbsent: student.isArrive === false ? true : false
+                }));
+                localStorage.setItem('studentsData', JSON.stringify(students));
+                renderAttendanceTable();
+            })
+            .catch(error => {
+                console.error("Error fetching students:", error);
+                showNotification("Không thể tải danh sách sinh viên.", "error");
+            });
+        }
+
+        function renderAttendanceTable() {
+            attendanceTableBody.innerHTML = '';
+            students.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${student.fullName}</td>
+                    <td style="text-align: center;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="present_${student.us_id}" ${student.isPresent ? 'checked' : ''}>
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td style="text-align: center;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="absent_${student.us_id}" ${student.isAbsent ? 'checked' : ''}>
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                `;
+                attendanceTableBody.appendChild(row);
+
+                const presentCheckbox = document.getElementById(`present_${student.us_id}`);
+                const absentCheckbox = document.getElementById(`absent_${student.us_id}`);
+
+                presentCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        absentCheckbox.checked = false;
+                        student.isPresent = true;
+                        student.isAbsent = false;
+                    } else {
+                        student.isPresent = false;
+                    }
+                });
+
+                absentCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        presentCheckbox.checked = false;
+                        student.isAbsent = true;
+                        student.isPresent = false;
+                    } else {
+                        student.isAbsent = false;
+                    }
+                });
+            });
+        }
+
+        function processSignalRResult() {
+            const processingResult = localStorage.getItem('processingResult');
+            if (!processingResult) {
+                console.log("No processing result found in localStorage.");
+                document.getElementById('warningAlert').style.display = 'none';
+                return;
+            }
+
+            const result = JSON.parse(processingResult);
+            const finalAttendance = result.final_attendance?.final_attendance || {};
+            const warning = result.final_attendance?.warning;
+
+            // Xử lý cảnh báo
+            const warningAlert = document.getElementById('warningAlert');
+            const warningMessage = document.getElementById('warningMessage');
+            if (warning && warning.trim() !== "") {
+                const scheduleId = localStorage.getItem('scheduleId');
+                const currentTime = new Date().toLocaleString('vi-VN', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                const displayMessage = `Có xuất hiện đối tượng lạ, ScheduleId: ${scheduleId}, thời gian: ${currentTime}`;
+
+                // Hiển thị cảnh báo trên giao diện
+                warningMessage.textContent = displayMessage;
+                warningAlert.style.display = 'block';
+
+                // Ghi log cảnh báo
+                const logPayload = {
+                    LogCommiterId: localStorage.getItem('userId'),
+                    LogPhone: logPhoneInput.value.trim() || "Unknown",
+                    LogDetails: displayMessage
+                };
+
+                fetch(`http://localhost:5243/api/Log/save-log`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(logPayload)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi lưu log: " + response.statusText);
+                    }
+                    console.log("Warning logged successfully.");
+                })
+                .catch(error => {
+                    console.error("Error saving warning log:", error);
+                });
+            } else {
+                // Ẩn cảnh báo nếu không có warning
+                warningAlert.style.display = 'none';
+            }
+
+            // Cập nhật trạng thái điểm danh
+            students.forEach(student => {
+                const isPresent = Object.keys(finalAttendance).some(key =>
+                    key.toLowerCase() === student.us_id.toLowerCase()
+                );
+                student.isPresent = isPresent;
+                student.isAbsent = !isPresent;
+            });
+
+            renderAttendanceTable();
+        }
+
+        function saveLog() {
+            const logPhone = logPhoneInput.value.trim();
+            if (!logPhone) {
+                showNotification("Vui lòng nhập số điện thoại trước khi lưu log.", "warning");
+                return;
+            }
+
+            const scheduleId = localStorage.getItem('scheduleId');
+            if (!scheduleId) {
+                showNotification("Không tìm thấy ScheduleId!", "error");
+                return;
+            }
+
+            const presentCount = students.filter(s => s.isPresent).length;
+            const absentCount = students.filter(s => s.isAbsent).length;
+            const currentTime = new Date().toLocaleString('vi-VN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const logDetails = `Đã điểm danh học sinh, số lượng vắng: ${absentCount}, số lượng có mặt: ${presentCount}, ScheduleId: ${scheduleId}, thời gian: ${currentTime}`;
+
+            const logPayload = {
+                LogCommiterId: localStorage.getItem('userId'),
+                LogPhone: logPhone,
+                LogDetails: logDetails
+            };
+
+            fetch(`http://localhost:5243/api/Log/save-log`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(logPayload)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Lỗi khi lưu log: " + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                showNotification("Lưu log thành công!", "success");
+                logPhoneInput.value = '';
+            })
+            .catch(error => {
+                console.error("Error saving log:", error);
+                showNotification("Lỗi khi lưu log: " + error.message, "error");
+            });
+        }
+
+        function submitAttendance() {
+            const scheduleId = localStorage.getItem('scheduleId');
+            if (!scheduleId) {
+                showNotification("Không tìm thấy ScheduleId!", "error");
+                return;
+            }
+
+            const attendanceRecords = students.map(student => ({
+                UsId: student.us_id,
+                IsArrive: student.isPresent
+            }));
+
+            const payload = { ScheduleId: scheduleId, AttendanceRecords: attendanceRecords };
+            console.log("Sending to API:", JSON.stringify(payload, null, 2));
+
+            fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/update-attendance`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                console.log("Response Status:", response.status);
+                return response.text().then(body => ({ response, body }));
+            })
+            .then(({ response, body }) => {
+                console.log("Response Body:", body);
+                const data = JSON.parse(body);
+                if (!response.ok) {
+                    throw new Error(`Cập nhật điểm danh thất bại: ${body}`);
+                }
+                console.log("Response Data:", data);
+                showNotification(data.message + ` Số bản ghi cập nhật: ${data.rowsAffected}`, "success");
+                localStorage.removeItem('scheduleId');
+                localStorage.removeItem('processingResult');
+                localStorage.removeItem('processingResultTimestamp');
+                attendanceSection.style.display = 'none';
+            })
+            .catch(error => {
+                console.error("Error updating attendance:", error);
+                showNotification("Có lỗi xảy ra khi cập nhật điểm danh: " + error.message, "error");
+            });
+        }
+
+        function recheckAttendance() {
+            processSignalRResult();
+            showNotification("Đã cập nhật lại trạng thái điểm danh", "info");
+        }
+
+        function checkAndClearLocalStorage() {
+            const timestamp = localStorage.getItem("processingResultTimestamp");
+            if (timestamp) {
+                const timeElapsed = Date.now() - parseInt(timestamp);
+                if (timeElapsed >= 10 * 60 * 1000) {
+                    localStorage.removeItem("processingResult");
+                    localStorage.removeItem("processingResultTimestamp");
+                    console.log("processingResult removed from localStorage after 10 minutes.");
+                }
+            }
+        }
+
+        function showNotification(message, type = "info") {
+            const notification = document.getElementById("notification");
+            const notificationMessage = document.getElementById("notificationMessage");
+
+            notificationMessage.textContent = message;
+            notification.style.backgroundColor =
+                type === "success" ? "#4caf50" :
+                type === "error" ? "#f44336" :
+                type === "warning" ? "#ff9800" : "#2196F3";
+
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

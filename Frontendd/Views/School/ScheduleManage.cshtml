@@ -1,0 +1,1740 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_School.cshtml";
+    ViewBag.Title = "Quản lý Lịch";
+}
+
+<head>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .container-custom {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 2100px;
+            animation: fadeIn 1s ease-in-out;
+            margin: 0 auto;
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+
+            .btn-add:hover {
+                background: linear-gradient(to right, #8E54E9, #4776E6);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(71, 118, 230, 0.4);
+                cursor: pointer;
+            }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 360px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+            .search-input:focus {
+                outline: none;
+                border-color: #4776E6;
+                box-shadow: 0 2px 15px rgba(71, 118, 230, 0.25);
+            }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8E54E9;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+            transition: 0.3s;
+        }
+
+        .btn-action {
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 0 3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-edit {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            color: white;
+            box-shadow: 0 2px 8px rgba(17, 153, 142, 0.3);
+        }
+
+            .btn-edit:hover {
+                background: linear-gradient(to right, #38ef7d, #11998e);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(17, 153, 142, 0.4);
+            }
+
+        .btn-delete {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+            color: white;
+            box-shadow: 0 2px 8px rgba(237, 33, 58, 0.3);
+        }
+
+            .btn-delete:hover {
+                background: linear-gradient(to right, #FF8177, #ED213A);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(237, 33, 58, 0.4);
+            }
+
+        .btn-icon {
+            margin-right: 6px;
+        }
+
+        /* Dialog overlay styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        /* Dialog box styles */
+        .dialog-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+            .dialog-box h3 {
+                margin-top: 0;
+                margin-bottom: 15px;
+                font-weight: 600;
+                color: #333;
+                display: flex;
+                align-items: center;
+            }
+
+                .dialog-box h3 i {
+                    margin-right: 10px;
+                    color: #8E54E9;
+                }
+
+            .dialog-box label {
+                margin-top: 10px;
+                margin-bottom: 5px;
+                font-weight: 500;
+                color: #555;
+            }
+
+            .dialog-box input,
+            .dialog-box select {
+                width: 100%;
+                padding: 10px 12px;
+                margin: 5px 0 12px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+                font-size: 14px;
+                color: #333;
+                background-color: #fff;
+                transition: all 0.3s;
+            }
+
+                .dialog-box input:focus,
+                .dialog-box select:focus {
+                    outline: none;
+                    border-color: #8E54E9;
+                    box-shadow: 0 0 0 2px rgba(142, 84, 233, 0.2);
+                }
+
+        .dialog-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-dialog {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-save {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            box-shadow: 0 4px 10px rgba(17, 153, 142, 0.3);
+        }
+
+            .btn-save:hover {
+                background: linear-gradient(to right, #38ef7d, #11998e);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(17, 153, 142, 0.4);
+            }
+
+        .btn-cancel {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+            box-shadow: 0 4px 10px rgba(237, 33, 58, 0.3);
+        }
+
+            .btn-cancel:hover {
+                background: linear-gradient(to right, #FF8177, #ED213A);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(237, 33, 58, 0.4);
+            }
+
+        .btn-delete-confirm {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+            box-shadow: 0 4px 10px rgba(237, 33, 58, 0.3);
+        }
+
+            .btn-delete-confirm:hover {
+                background: linear-gradient(to right, #FF8177, #ED213A);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(237, 33, 58, 0.4);
+            }
+
+        .btn-icon-dialog {
+            margin-right: 8px;
+        }
+
+        .dialog-alert {
+            color: #777;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Toast notification system */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            width: 350px;
+        }
+
+        .toast-notification {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            margin-bottom: 15px;
+            transform: translateX(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: flex-start;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .toast-notification.show {
+                transform: translateX(0);
+            }
+
+        .toast-icon {
+            min-width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        .toast-success .toast-icon {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .toast-error .toast-icon {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+            color: white;
+        }
+
+        .toast-info .toast-icon {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+        }
+
+        .toast-content {
+            flex-grow: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .toast-message {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .toast-close {
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+            margin-left: 15px;
+            font-size: 18px;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+            .toast-close:hover {
+                color: #333;
+            }
+
+        .toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: #ddd;
+        }
+
+        .toast-progress-bar {
+            height: 100%;
+            width: 100%;
+        }
+
+        .toast-success .toast-progress-bar {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+        }
+
+        .toast-error .toast-progress-bar {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+        }
+
+        .toast-info .toast-progress-bar {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .student-list {
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+            .student-table th,
+            .student-table td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            .student-table th {
+                background: linear-gradient(to right, #4776E6, #8E54E9);
+                color: white;
+            }
+
+        /* UPDATED: Modified auto-attendance-container to make buttons closer together */
+        .auto-attendance-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 5px; /* Reduced gap between buttons */
+        }
+
+        .auto-attendance-btn {
+            padding: 8px 12px; /* Slightly reduced padding */
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 5px; /* Added small right margin */
+        }
+
+        .btn-present {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+        }
+
+        .btn-absent {
+            background: linear-gradient(to right, #ED213A, #FF8177);
+        }
+
+        /* Responsive styles */
+        @@media only screen and (max-width: 768px) {
+            .container-custom {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            .btn-add {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .dialog-box {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            .toast-container {
+                width: 90%;
+                right: 5%;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+            /* Updated responsive styling for attendance buttons */
+            .auto-attendance-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 5px;
+                justify-content: center;
+            }
+
+            .auto-attendance-btn {
+                margin: 2px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+        /* Toast Notification Styles */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 300px;
+            max-width: 500px;
+            z-index: 9999;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+            .toast-notification.toast-hiding {
+                animation: slideOut 0.5s ease-in forwards;
+            }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+        }
+
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        .toast-message {
+            flex-grow: 1;
+            font-size: 14px;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.5);
+            padding: 0;
+            margin-left: 8px;
+        }
+
+            .toast-close:hover {
+                color: rgba(0, 0, 0, 0.7);
+            }
+
+        /* Toast Types */
+        .toast-success {
+            background-color: #e7f8ef;
+            border-left: 4px solid #51cf66;
+            color: #2b8a3e;
+        }
+
+        .toast-error {
+            background-color: #fff5f5;
+            border-left: 4px solid #ff6b6b;
+            color: #c92a2a;
+        }
+
+        .toast-warning {
+            background-color: #fff9db;
+            border-left: 4px solid #fcc419;
+            color: #e67700;
+        }
+
+        .toast-info {
+            background-color: #e7f5ff;
+            border-left: 4px solid #339af0;
+            color: #1864ab;
+        }
+
+        /* Toast Icons */
+        .toast-success .toast-icon {
+            color: #40c057;
+        }
+
+        .toast-error .toast-icon {
+            color: #fa5252;
+        }
+
+        .toast-warning .toast-icon {
+            color: #fd7e14;
+        }
+
+        .toast-info .toast-icon {
+            color: #228be6;
+        }
+
+        /* Animations */
+        @@keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @@keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-custom" id="container-view">
+        <h2><i class="fas fa-calendar-alt"></i> Schedule List</h2>
+        <!-- Search container with search on left and add button on right -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="scheduleSearch" class="search-input" placeholder="Search schedules..." onkeyup="filterSchedules()">
+            </div>
+            <button class="btn-add" onclick="openCreateDialog()">
+                <i class="fas fa-plus-circle" style="margin-right: 5px;"></i> Create Schedule
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table schedule-table" id="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Subject</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Number of Students</th>
+                        <th>Class</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be loaded via Fetch -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Create Dialog -->
+    <div id="createDialog" style="display:none;" class="dialog-overlay">
+        <div class="dialog-box">
+            <h3><i class="fas fa-plus-circle"></i> Create Schedule</h3>
+            <form id="createForm">
+                <label>Subject:</label>
+                <select id="newSubjectId" required>
+                    <!-- Subjects will be loaded from API -->
+                </select>
+
+                <label>Start Time:</label>
+                <input type="datetime-local" id="newStartTime" required />
+
+                <label>End Time:</label>
+                <input type="datetime-local" id="newEndTime" required />
+
+                <label>Number of Students:</label>
+                <input type="number" id="newNumStudents" required />
+
+                <label>Class:</label>
+                <select id="newClassId" required>
+                    <!-- Classes will be loaded from API -->
+                </select>
+
+                <div class="dialog-buttons">
+                    <button type="submit" class="btn-dialog btn-save">
+                        <i class="fas fa-save btn-icon-dialog"></i> Create
+                    </button>
+                    <button type="button" class="btn-dialog btn-cancel" onclick="$('#createDialog').hide()">
+                        <i class="fas fa-times btn-icon-dialog"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Dialog -->
+    <div id="editDialog" style="display:none;" class="dialog-overlay">
+        <div class="dialog-box">
+            <h3><i class="fas fa-edit"></i> Edit Schedule</h3>
+            <form id="editForm">
+                <input type="hidden" id="scheduleIdEdit" />
+
+                <label>Subject:</label>
+                <select id="subjectIdEdit" required>
+                    <!-- Subjects will be loaded from API -->
+                </select>
+
+                <label>Start Time:</label>
+                <input type="datetime-local" id="startTimeEdit" required />
+
+                <label>End Time:</label>
+                <input type="datetime-local" id="endTimeEdit" required />
+
+                <label>Number of Students:</label>
+                <input type="number" id="numStudentsEdit" required />
+
+                <label>Class:</label>
+                <select id="classIdEdit" required>
+                    <!-- Classes will be loaded from API -->
+                </select>
+
+                <div class="dialog-buttons">
+                    <button type="submit" class="btn-dialog btn-save">
+                        <i class="fas fa-save btn-icon-dialog"></i> Save
+                    </button>
+                    <button type="button" class="btn-dialog btn-cancel" onclick="$('#editDialog').hide()">
+                        <i class="fas fa-times btn-icon-dialog"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Dialog -->
+    <div id="deleteDialog" style="display:none;" class="dialog-overlay">
+        <div class="dialog-box">
+            <h3><i class="fas fa-trash-alt"></i> Delete Schedule</h3>
+            <input type="hidden" id="scheduleIdDelete" />
+            <div class="dialog-alert">
+                <i class="fas fa-exclamation-triangle" style="color: #ED213A;"></i>
+                Are you sure you want to delete this schedule?
+            </div>
+            <div class="dialog-buttons">
+                <button class="btn-dialog btn-delete-confirm" onclick="confirmDelete()">
+                    <i class="fas fa-trash-alt btn-icon-dialog"></i> Delete
+                </button>
+                <button class="btn-dialog btn-cancel" onclick="$('#deleteDialog').hide()">
+                    <i class="fas fa-times btn-icon-dialog"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()">&times;</span>
+            <h3><i class="fas fa-clipboard-list"></i> Attendance - <span id="subjectName"></span></h3>
+            <h3>Teachers assigned - <span id="teacherName"></span></h3>
+            <div class="auto-attendance-container">
+                <button class="auto-attendance-btn btn-present" onclick="autoAttendanceAll('present')">
+                    <i class="fas fa-check-circle"></i> All Present
+                </button>
+                <button class="auto-attendance-btn btn-absent" onclick="autoAttendanceAll('absent')">
+                    <i class="fas fa-times-circle"></i> All Absent
+                </button>
+                <button class="auto-attendance-btn btn-save" onclick="saveAttendance()">
+                    <i class="fas fa-save"></i> Save Attendance
+                </button>
+                <button class="auto-attendance-btn btn-add" onclick="openAddStudentModal()">
+                    <i class="fas fa-user-plus"></i> Add Student
+                </button>
+                <button class="auto-attendance-btn btn-add" onclick="openAddTeacherModal()">
+                    <i class="fas fa-user-plus"></i> Add Teacher
+                </button>
+            </div>
+            <div id="studentList" class="student-list">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">No.</th>
+                            <th width="30%">Full Name</th>
+                            <th width="30%">Present</th>
+                            <th width="30%">Absent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Rows rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddStudentModal()">&times;</span>
+            <h3><i class="fas fa-user-plus"></i> Add Student to Schedule</h3>
+            <form id="addStudentForm">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th style="text-align: center;">Select</th>
+                        </tr>
+                    </thead>
+                    <tbody id="addStudentTableBody">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+                <div style="text-align: right; margin-top: 10px;">
+                    <button type="button" class="btn-dialog btn-save" onclick="submitStudentsToSchedule()">
+                        <i class="fas fa-save btn-icon-dialog"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Giáo Viên -->
+    <div id="addTeacherModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTeacherModal()">&times;</span>
+            <h3><i class="fas fa-user-plus"></i> Add Teacher to Schedule</h3>
+
+            <form id="addTeacherForm">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th style="text-align: center;">Chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="addTeacherTableBody">
+                        <!-- Render tại đây -->
+                    </tbody>
+                </table>
+                <div style="text-align: right; margin-top: 10px;">
+                    <button type="button" class="btn-dialog btn-save" onclick="submitTeachersToSchedule()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @section Scripts {
+        <script>
+            let teachers = [];
+            function openAddTeacherModal() {
+                const addTeacherModal = document.getElementById('addTeacherModal');
+                const tableBody = document.getElementById('addTeacherTableBody');
+                tableBody.innerHTML = '';
+
+                fetch('http://localhost:5243/api/User/teachers', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const existingIds = teachers.map(t => t.us_id); // 📌 teachers là danh sách GV đã trong schedule
+
+                    if (data.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="4">Không có giáo viên nào.</td></tr>';
+                    } else {
+                        data.forEach((teacher, index) => {
+                            const isChecked = existingIds.includes(teacher.usId);
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${index + 1}</td>
+                                <td>${teacher.usUsername}</td>
+                                <td>${teacher.usEmail}</td>
+                                <td style="text-align: center;">
+                                    <input type="checkbox" name="teacherCheckbox" value="${teacher.usId}" ${isChecked ? 'checked' : ''}>
+                                </td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    }
+
+                    addTeacherModal.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tải danh sách giáo viên:", error);
+                    showToast("Không thể tải danh sách giáo viên.", "error");
+                });
+            }
+
+            function closeAddTeacherModal() {
+                document.getElementById('addTeacherModal').style.display = 'none';
+            }
+
+            function submitTeachersToSchedule() {
+                const allCheckboxes = document.querySelectorAll('input[name="teacherCheckbox"]');
+                const scheduleId = localStorage.getItem('schedule_id');
+
+                if (!scheduleId) {
+                    showToast("Không tìm thấy ID của lịch học.", "error");
+                    return;
+                }
+
+                const selectedTeacherIds = [];
+                const unselectedTeacherIds = [];
+
+                allCheckboxes.forEach(cb => {
+                    if (cb.checked) {
+                        selectedTeacherIds.push(cb.value);
+                    } else {
+                        unselectedTeacherIds.push(cb.value);
+                    }
+                });
+
+                const existingIds = teachers.map(t => t.us_id); // 📌 GV đã có trong schedule
+
+                const addRequests = selectedTeacherIds
+                    .filter(userId => !existingIds.includes(userId))
+                    .map(userId => {
+                        const dto = {
+                            user_id: userId,
+                            schedule_id: scheduleId
+                        };
+
+                        return fetch("http://localhost:5243/api/Schedule/AddUserToSchedule", {
+                            method: "POST",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(dto)
+                        });
+                    });
+
+                const deleteRequests = unselectedTeacherIds
+                    .filter(userId => existingIds.includes(userId))
+                    .map(userId => {
+                        const url = `http://localhost:5243/api/Schedule/RemoveTeacherFromSchedule?userId=${userId}&scheduleId=${scheduleId}`;
+                        return fetch(url, {
+                            method: "DELETE",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            }
+                        });
+                    });
+
+                Promise.all([...addRequests, ...deleteRequests])
+                    .then(responses => {
+                        const hasError = responses.some(res => !res.ok);
+                        if (hasError) {
+                            showToast("Có lỗi khi cập nhật giáo viên.", "error");
+                        } else {
+                            showToast("Cập nhật danh sách giáo viên thành công", "error");
+                            closeAddTeacherModal();
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("❌ Lỗi khi gửi dữ liệu:", error);
+                        showToast("Không thể gửi dữ liệu tới server.", "error");
+                    });
+            }
+
+            // Toast Notification System
+            function showToast(message, type = 'success') {
+                // Remove existing toast if any
+                const existingToast = document.getElementById('toast-notification');
+                if (existingToast) {
+                    existingToast.remove();
+                }
+
+                // Create toast container
+                const toast = document.createElement('div');
+                toast.id = 'toast-notification';
+                toast.className = `toast-notification toast-${type}`;
+
+                // Add icon based on type
+                let icon = '';
+                switch(type) {
+                    case 'success':
+                        icon = '<i class="fas fa-check-circle"></i>';
+                        break;
+                    case 'error':
+                        icon = '<i class="fas fa-exclamation-circle"></i>';
+                        break;
+                    case 'warning':
+                        icon = '<i class="fas fa-exclamation-triangle"></i>';
+                        break;
+                    case 'info':
+                        icon = '<i class="fas fa-info-circle"></i>';
+                        break;
+                }
+
+                // Create toast content
+                toast.innerHTML = `
+                    <div class="toast-content">
+                        <div class="toast-icon">${icon}</div>
+                        <div class="toast-message">${message}</div>
+                        <button class="toast-close" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Add to document
+                document.body.appendChild(toast);
+
+                // Auto remove after 3 seconds
+                setTimeout(() => {
+                    if (toast && document.body.contains(toast)) {
+                        toast.classList.add('toast-hiding');
+                        setTimeout(() => toast.remove(), 500);
+                    }
+                }, 3000);
+            }
+
+            function filterSchedules() {
+                const input = document.getElementById("scheduleSearch");
+                const filter = input.value.toLowerCase();
+                const table = document.getElementById("schedule-table");
+                const rows = table.getElementsByTagName("tr");
+
+                // Duyệt qua từng dòng trừ header (bắt đầu từ i = 1)
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName("td");
+                    let matchFound = false;
+
+                    for (let j = 0; j < cells.length - 1; j++) { // không tìm trong cột Actions
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(filter)) {
+                            matchFound = true;
+                            break;
+                        }
+                    }
+
+                    row.style.display = matchFound ? "" : "none";
+                }
+            }
+
+
+            // Open Add student modal
+            function openAddStudentModal() {
+                const addStudentModal = document.getElementById('addStudentModal');
+                const tableBody = document.getElementById('addStudentTableBody');
+                tableBody.innerHTML = '';
+
+                fetch('http://localhost:5243/api/User/students', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const existingIds = students.map(s => s.us_id); // 📌 students là danh sách SV đã trong schedule
+
+                    if (data.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="4">Không có sinh viên nào.</td></tr>';
+                    } else {
+                        data.forEach((student, index) => {
+                            const isChecked = existingIds.includes(student.usId); // ✅ Đã có trong schedule
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${index + 1}</td>
+                                <td>${student.usUsername}</td>
+                                <td>${student.usEmail}</td>
+                                <td style="text-align: center;">
+                                    <input type="checkbox" name="studentCheckbox" value="${student.usId}" ${isChecked ? 'checked' : ''}>
+                                </td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    }
+
+                    addStudentModal.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tải danh sách sinh viên:", error);
+                    showToast("Không thể tải danh sách sinh viên.", "error");
+                });
+            }
+
+                        function submitStudentsToSchedule() {
+                const allCheckboxes = document.querySelectorAll('input[name="studentCheckbox"]');
+                const scheduleId = localStorage.getItem('schedule_id');
+
+                if (!scheduleId) {
+                    showToast("Không tìm thấy ID của lịch học.", "error");
+                    return;
+                }
+
+                const selectedStudentIds = [];
+                const unselectedStudentIds = [];
+
+                allCheckboxes.forEach(cb => {
+                    if (cb.checked) {
+                        selectedStudentIds.push(cb.value);
+                    } else {
+                        unselectedStudentIds.push(cb.value);
+                    }
+                });
+
+                const existingIds = students.map(s => s.us_id); // 📌 SV đã có trong schedule
+
+                // 🟢 Thêm mới
+                const addRequests = selectedStudentIds
+                    .filter(userId => !existingIds.includes(userId))
+                    .map(userId => {
+                        const dto = {
+                            user_id: userId,
+                            schedule_id: scheduleId,
+                            isArrive: false
+                        };
+
+                        return fetch("http://localhost:5243/api/Schedule/AddUserToSchedule", {
+                            method: "POST",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(dto)
+                        });
+                    });
+
+                // 🔴 Xoá những user đã có nhưng bị bỏ chọn
+                const deleteRequests = unselectedStudentIds
+                    .filter(userId => existingIds.includes(userId))
+                    .map(userId => {
+                        const url = `http://localhost:5243/api/Schedule/RemoveStudentFromSchedule?userId=${userId}&scheduleId=${scheduleId}`;
+                        return fetch(url, {
+                            method: "DELETE",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            }
+                        }); // ✅ ĐÃ THÊM ĐỦ NGOẶC
+                    });
+
+                Promise.all([...addRequests, ...deleteRequests])
+                    .then(responses => {
+                        const hasError = responses.some(res => !res.ok);
+                        if (hasError) {
+                            showToast("Có lỗi khi cập nhật sinh viên.", "error");
+                        } else {
+                            showToast("Cập nhật danh sách sinh viên thành công!", "success");
+                            closeAddStudentModal();
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("❌ Lỗi khi gửi dữ liệu:", error);
+                        showToast("Không thể gửi dữ liệu tới server.", "error");
+                    });
+            }
+
+
+
+            function closeAddStudentModal() {
+                document.getElementById('addStudentModal').style.display = 'none';
+            }
+
+            let students = [];
+
+            // Open Attendance List
+            function openAttendanceModal(subjectName, scheduleId, className) {
+                const modal = document.getElementById('attendanceModal');
+                const subjectNameSpan = document.getElementById('subjectName');
+                const studentTableBody = document.getElementById('studentTableBody');
+
+                subjectNameSpan.textContent = `${subjectName} - ${className}`;
+                studentTableBody.innerHTML = '';
+
+                fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/${scheduleId}/students`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        showToast("API trả về dữ liệu không hợp lệ.", "error");
+                        return;
+                    }
+                    students = data;
+                    if (students.length === 0) {
+                        studentTableBody.innerHTML = `<tr><td colspan="5">Chưa có danh sách sinh viên.</td></tr>`;
+                    } else {
+                        students.forEach((student, index) => {
+                            if (student.isArrive === true) {
+                                student.isPresent = true;
+                                student.isAbsent = false;
+                            } else if (student.isArrive === false) {
+                                student.isPresent = false;
+                                student.isAbsent = true;
+                            } else {
+                                student.isPresent = false;
+                                student.isAbsent = false;
+                            }
+
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${index + 1}</td>
+                                <td>${student.fullName}</td>
+                                <td>
+                                    <div class="attendance-option">
+                                        <input type="checkbox"
+                                               id="present_${student.us_id}"
+                                               ${student.isPresent ? 'checked' : ''}
+                                               onchange="updateCheckboxState('${student.us_id}', 'present')">
+                                        <label for="present_${student.us_id}">Có mặt</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="attendance-option">
+                                        <input type="checkbox"
+                                               id="absent_${student.us_id}"
+                                               ${student.isAbsent ? 'checked' : ''}
+                                               onchange="updateCheckboxState('${student.us_id}', 'absent')">
+                                        <label for="absent_${student.us_id}">Vắng</label>
+                                    </div>
+                                </td>
+                            `;
+                            studentTableBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => {
+                    showToast("Đã có lỗi xảy ra khi lấy danh sách sinh viên.", "error");
+                });
+
+                fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/${scheduleId}/teachers`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        showToast("API trả về dữ liệu không hợp lệ.", "error");
+                        return;
+                    }
+
+                    teachers = data;
+
+                    const teacherNameSpan = document.getElementById("teacherName");
+                    if (teachers.length === 0) {
+                        teacherNameSpan.textContent = "Không có giáo viên";
+                    } else {
+                    
+                        const names = teachers.map(t => t.fullName).join(", ");
+                        teacherNameSpan.textContent = names;
+                    }
+                })
+                .catch(error => {
+                    console.log(JSON.stringify("error: " + error));
+                    showToast("Đã có lỗi xảy ra khi lấy danh sách giáo viên.", "error");
+                });
+
+
+                modal.style.display = 'block';
+            }
+
+            async function saveAttendance() {
+                const scheduleId = window.localStorage.getItem("schedule_id");
+
+                const updates = students
+                    .filter(s => s.isPresent || s.isAbsent)
+                    .map(s => ({
+                        user_id: s.us_id,
+                        schedule_id: scheduleId,
+                        isArrive: s.isPresent ? true : false
+                    }));
+
+                if (updates.length === 0) {
+                    showToast("Bạn chưa đánh dấu điểm danh cho sinh viên nào.", "error");
+                    return;
+                }
+
+                try {
+                    for (const update of updates) {
+                        const response = await fetch(`http://localhost:5243/api/Schedule/UpdateStatusArrive`, {
+                            method: "POST",
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(update)
+                        });
+
+                        const result = await response.json();
+
+                        if (!response.ok || result.success !== true) {
+                            throw new Error(`❌ Lỗi cập nhật user ${update.user_id}: ${result.message || 'Không rõ lỗi'}`);
+                        }
+                    }
+
+                    showToast("Đã lưu điểm danh cho tất cả học sinh!", "success");
+                    closeAttendanceModal();
+                } catch (err) {
+                    console.error("Lỗi khi lưu điểm danh:", err);
+                    showToast("Có lỗi xảy ra khi lưu điểm danh.", "error");
+                }
+            }
+
+            function updateCheckboxState(studentId, changedField) {
+                students = students.map(s => {
+                    if (s.us_id === studentId) {
+                        const presentCheckbox = document.getElementById(`present_${studentId}`);
+                        const absentCheckbox = document.getElementById(`absent_${studentId}`);
+
+                        if (changedField === 'present') {
+                            if (presentCheckbox.checked) {
+                                s.isPresent = true;
+                                s.isAbsent = false;
+                            } else if (!absentCheckbox.checked) {
+                                // Không cho phép bỏ hết tích
+                                presentCheckbox.checked = true;
+                                s.isPresent = true;
+                                s.isAbsent = false;
+                            }
+                        } else if (changedField === 'absent') {
+                            if (absentCheckbox.checked) {
+                                s.isPresent = false;
+                                s.isAbsent = true;
+                            } else if (!presentCheckbox.checked) {
+                                // Không cho phép bỏ hết tích
+                                absentCheckbox.checked = true;
+                                s.isPresent = false;
+                                s.isAbsent = true;
+                            }
+                        }
+
+                        // Đồng bộ UI lại với state
+                        presentCheckbox.checked = s.isPresent;
+                        absentCheckbox.checked = s.isAbsent;
+
+                        // Cập nhật trạng thái isArrive cho backend
+                        s.isArrive = s.isPresent ? true : false;
+                    }
+                    return s;
+                });
+            }
+
+
+            function autoAttendanceAll(type) {
+                students.forEach(s => {
+                    s.isPresent = false;
+                    s.isAbsent = false;
+
+                    if (type === 'present') s.isPresent = true;
+                    if (type === 'absent')  s.isAbsent = true;
+
+                    document.getElementById(`present_${s.us_id}`).checked = s.isPresent;
+                    document.getElementById(`absent_${s.us_id}`).checked  = s.isAbsent;
+                });
+            }
+
+            function closeAttendanceModal() {
+                document.getElementById('attendanceModal').style.display = 'none';
+            }
+
+            function redirectToBetaAi() {
+                closeAttendanceModal();
+                window.location.href = '/Home/BetaAi';
+            }
+
+            function getCurrentDate() {
+                const now = new Date();
+                return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+            }
+
+            window.onclick = function(e) {
+                const modal = document.getElementById('attendanceModal');
+                if (e.target === modal) {
+                    closeAttendanceModal();
+                }
+            };
+
+            function updateStatusArrive(user_id, schedule_id, isArrive) {
+                fetch("http://localhost:5243/api/Schedule/UpdateStatusArrive", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        user_id: user_id,
+                        schedule_id: schedule_id,
+                        isArrive: isArrive
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error("Cập nhật thất bại");
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        showToast("Trạng thái đã được cập nhật!", "success");
+                    } else {
+                        alert("❌ " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi gọi API cập nhật:", error);
+                    showToast("Có lỗi xảy ra khi cập nhật trạng thái.", "error");
+                });
+            }
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                loadSchedules();
+                loadSubjects();
+                loadClasses();
+            });
+
+            function loadSchedules() {
+                fetch('http://localhost:5243/api/Schedule/GetAll', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok (schedules)');
+                    return response.json();
+                })
+                .then(data => {
+                    populateSchedules(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching schedules: " + error);
+                    showToast("Không thể tải danh sách lịch học.", "error");
+                });
+            }
+
+            function populateSchedules(data) {
+                const scheduleTableBody = document.querySelector('#schedule-table tbody');
+                scheduleTableBody.innerHTML = '';
+
+                if (!Array.isArray(data)) {
+                    showToast("API trả về dữ liệu lịch học không hợp lệ.", "error");
+                    return;
+                }
+
+                data.sort((a, b) => new Date(a.scStarttime) - new Date(b.scStarttime));
+
+                if (data.length === 0) {
+                    scheduleTableBody.innerHTML = '<tr><td colspan="7">Không có lịch học</td></tr>';
+                    return;
+                }
+
+                // Map thành các Promise fetch
+                const fetches = data.map((scheduleItem, index) => {
+                    return fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/${scheduleItem.scId}/students`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(studentData => ({ scheduleItem, index, studentCount: Array.isArray(studentData) ? studentData.length : 0 }))
+                    .catch(error => {
+                        console.error(`❌ Lỗi khi lấy sinh viên cho schedule ${scheduleItem.scId}:`, error);
+                        return { scheduleItem, index, studentCount: 0 };
+                    });
+                });
+
+                // Chờ tất cả fetch xong
+                Promise.all(fetches).then(results => {
+                    results.forEach(({ scheduleItem, index, studentCount }) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${scheduleItem.subjectName}</td>
+                            <td>${new Date(scheduleItem.scStarttime).toLocaleString()}</td>
+                            <td>${new Date(scheduleItem.scEndtime).toLocaleString()}</td>
+                            <td>${studentCount}</td>
+                            <td>${scheduleItem.className}</td>
+                            <td>
+                                <button class="btn-action btn-edit" onclick="event.stopPropagation(); openEditDialog('${scheduleItem.scId}', '${scheduleItem.subjectName}', '${scheduleItem.scStarttime}', '${scheduleItem.scEndtime}', '${studentCount}', '${scheduleItem.className}')">✏️ Edit</button>
+                                <button class="btn-action btn-delete" onclick="event.stopPropagation(); openDeleteDialog('${scheduleItem.scId}')">❌ Delete</button>
+                            </td>
+                        `;
+
+                        row.onclick = () => {
+                            console.log("🆔 Clicked schedule_id: ", scheduleItem.scId);
+                            localStorage.setItem("schedule_id", scheduleItem.scId);
+                            openAttendanceModal(scheduleItem.subjectName, scheduleItem.scId, scheduleItem.className);
+                        };
+
+                        scheduleTableBody.appendChild(row);
+                    });
+                });
+            }
+
+
+
+            function loadSubjects() {
+                fetch('http://localhost:5243/api/Subject/GetAll', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const subjectSelect = document.getElementById('newSubjectId');
+                    const subjectEditSelect = document.getElementById('subjectIdEdit');
+                    data.forEach(subject => {
+                        const option = new Option(subject.sbName, subject.sbId);
+                        subjectSelect.add(option.cloneNode(true));
+                        subjectEditSelect.add(option.cloneNode(true));
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading subjects: " + error);
+                    showToast("Không thể tải danh sách môn học.", "error");
+                });
+            }
+
+            function loadClasses() {
+                fetch('http://localhost:5243/api/Class/GetAll', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const classSelect = document.getElementById('newClassId');
+                    const classEditSelect = document.getElementById('classIdEdit');
+                    data.forEach(classItem => {
+                        const option = new Option(classItem.clName, classItem.clId);
+                        classSelect.add(option.cloneNode(true));
+                        classEditSelect.add(option.cloneNode(true));
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading classes: " + error);
+                    showToast("Không thể tải danh sách lớp học.", "error");
+                });
+            }
+
+            function openCreateDialog() {
+                $("#newStartTime").val('');
+                $("#newEndTime").val('');
+                $("#newNumStudents").val('');
+                $("#newSubjectId").val('');
+                $("#newClassId").val('');
+                $("#createDialog").show();
+            }
+
+            // Create new schedule
+            document.getElementById("createForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const newSchedule = {
+                    SubjectId: $("#newSubjectId").val(),
+                    ScStarttime: $("#newStartTime").val(),
+                    ScEndtime: $("#newEndTime").val(),
+                    ScNumstudent: $("#newNumStudents").val(),
+                    ClassId: $("#newClassId").val()
+                };
+
+
+                fetch('http://localhost:5243/api/Schedule/Create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newSchedule)
+
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast("Tạo thành công!", "success");
+                        $("#createDialog").hide();
+                        loadSchedules();
+                    } else {
+                        showToast("Tạo lịch học thất bại.", "error");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tạo lịch học:", error);
+                    showToast("Tạo lịch học thất bại.", "error");
+                });
+            });
+
+            function openEditDialog(scheduleId, subjectId, startTime, endTime, numStudents, classId) {
+                $("#scheduleIdEdit").val(scheduleId);
+                $("#subjectIdEdit").val(subjectId);
+                $("#startTimeEdit").val(new Date(startTime).toISOString().slice(0, 16));
+                $("#endTimeEdit").val(new Date(endTime).toISOString().slice(0, 16));
+                $("#numStudentsEdit").val(numStudents);
+                $("#classIdEdit").val(classId);
+                $("#editDialog").show();
+            }
+
+            // Edit schedule
+            document.getElementById("editForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const scheduleId = $("#scheduleIdEdit").val();
+                const updatedSchedule = {
+                    ScId: scheduleId,
+                    SubjectId: $("#subjectIdEdit").val(),
+                    ScStarttime: $("#startTimeEdit").val(),
+                    ScEndtime: $("#endTimeEdit").val(),
+                    ScNumstudent: $("#numStudentsEdit").val(),
+                    ClassId: $("#classIdEdit").val()
+                };
+                console.log("Schedule truoc khi luu Edit " + JSON.stringify(updatedSchedule));
+                fetch(`http://localhost:5243/api/Schedule/Edit/${scheduleId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedSchedule)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast("Cập nhật danh sách thành công!", "success");
+                        $("#editDialog").hide();
+                        loadSchedules();
+                    } else {
+                        showToast("Tạo lịch học thất bại.", "error");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi cập nhật lịch học:", error);
+                    showToast("Tạo lịch học thất bại.", "error");
+                });
+            });
+
+            function openDeleteDialog(scheduleId) {
+                $("#scheduleIdDelete").val(scheduleId);
+                $("#deleteDialog").show();
+            }
+
+            function confirmDelete() {
+                const scheduleId = $("#scheduleIdDelete").val();
+
+                fetch(`http://localhost:5243/api/Schedule/Delete/${scheduleId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast("Xóa thành công!", "success");
+                        $("#deleteDialog").hide();
+                        loadSchedules();
+                    } else {
+                        showToast("Xóa lịch học thất bại.", "error");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi xóa lịch học:" + JSON.stringify(data));
+                    showToast("Có lỗi xảy ra khi xóa lịch học.", "error");
+                });
+            }
+        </script>
+    }
+</body>
+

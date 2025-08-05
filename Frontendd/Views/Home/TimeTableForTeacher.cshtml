@@ -1,0 +1,642 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lịch cá nhân";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/timetable.css" asp-append-version="true" />
+}
+
+<!-- Layout chính -->
+<div class="main-layout">
+    <!-- Lịch tuần (Thời khóa biểu) -->
+    <div class="schedule-wrapper">
+        <div class="schedule-header">
+            <h2>Lịch cá nhân</h2>
+        </div>
+        <div id="currentRange" class="range-info"></div>
+        <div class="timetable-scroll-container">
+            <div class="time-column">
+                @for (int hour = 7; hour <= 20; hour++)
+                {
+                    <div class="time-label">@hour:00</div>
+                }
+            </div>
+            <div id="scheduleContainer" class="schedule-container">
+                @{
+                    int[] dayIndices = { 1, 2, 3, 4, 5, 6, 0 };
+                    string[] dayNames = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                    for (int i = 0; i < 7; i++)
+                    {
+                        <div class="day-column" data-day="@dayIndices[i]">
+                            <div class="day-header">@dayNames[i]</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Cột phải chứa lịch tháng và Upcoming Schedules -->
+    <div class="right-column">
+        <!-- Mini Calendar -->
+        <div class="calendar-box">
+            <h3>Lịch tháng</h3>
+            <div class="calendar-header">
+                <button onclick="prevMonth()"><</button>
+                <div id="monthYear" class="month-year"></div>
+                <button onclick="nextMonth()">></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Render bằng JS -->
+            </div>
+        </div>
+
+        <!-- Upcoming Schedules -->
+        <div class="upcoming-schedules">
+            <h3>Upcoming Schedules</h3>
+            <div id="upcomingSchedulesList">
+                <!-- Render bằng JS -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Điểm Danh -->
+<div id="attendanceModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAttendanceModal()">×</span>
+        <h3 id="modalTitle"><span id="subjectName"></span></h3>
+        <div class="auto-attendance-container">
+            <button class="auto-attendance-btn btn-auto" onclick="redirectToBetaAi()">
+                Điểm danh AI
+            </button>
+            <button class="auto-attendance-btn btn-present" onclick="autoAttendanceAll('present')">
+                Tất cả có mặt
+            </button>
+            <button class="auto-attendance-btn btn-absent" onclick="autoAttendanceAll('absent')">
+                Tất cả vắng
+            </button>
+            <button class="auto-attendance-btn btn-save" onclick="saveAttendance()">
+                Lưu điểm danh
+            </button>
+        </div>
+        <div id="studentList" class="student-list">
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th width="10%">STT</th>
+                        <th width="30%">Họ và tên</th>
+                        <th width="20%">Có mặt</th>
+                        <th width="20%">Vắng phép</th>
+                        <th width="20%">Vắng</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <!-- Hàng render bởi JS -->
+                </tbody>
+            </table>
+        </div>
+        <div id="attendanceStats" class="attendance-stats">
+            <!-- Thống kê điểm danh -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        /* Biến toàn cục */
+        let currentScheduleId;
+        let students = [];
+        let currentStartDate, currentEndDate;
+        const startHour = 7;
+        const endHour = 20;
+        const totalMinutes = (endHour - startHour) * 60;
+        const columnHeight = 60 * (endHour - startHour);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date();
+            loadWeekFromSelectedDate(today);
+            renderMiniCalendar();
+            loadUpcomingSchedules();
+        });
+
+        /* Hàm cho Modal Điểm Danh */
+        function openAttendanceModal(subjectName, scheduleId, className) {
+            currentScheduleId = scheduleId;
+            localStorage.setItem("scheduleId", scheduleId);
+
+            const modal = document.getElementById('attendanceModal');
+            const subjectNameSpan = document.getElementById('subjectName');
+            const studentTableBody = document.getElementById('studentTableBody');
+            const currentDate = getCurrentDate();
+
+            subjectNameSpan.textContent = `${subjectName} - ${className} - ${currentDate}`;
+            studentTableBody.innerHTML = '';
+
+            fetch(`http://localhost:5243/api/TimeTableForTeacher/schedule/${scheduleId}/students`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!Array.isArray(data)) {
+                    alert("API trả về dữ liệu không hợp lệ.");
+                    return;
+                }
+                students = data;
+                if (students.length === 0) {
+                    studentTableBody.innerHTML = `<tr><td colspan="5">Chưa có danh sách sinh viên.</td></tr>`;
+                } else {
+                    students.forEach((student, index) => {
+                        if (student.isArrive === true) {
+                            student.isPresent = true;
+                            student.isExcused = false;
+                            student.isAbsent = false;
+                        } else if (student.isArrive === false) {
+                            student.isPresent = false;
+                            student.isExcused = false;
+                            student.isAbsent = true;
+                        } else {
+                            student.isPresent = false;
+                            student.isExcused = true;
+                            student.isAbsent = false;
+                        }
+
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${student.fullName}</td>
+                            <td>
+                                <div class="attendance-option">
+                                    <input type="checkbox"
+                                           id="present_${student.us_id}"
+                                           ${student.isPresent ? 'checked' : ''}
+                                           onchange="updateCheckboxState('${student.us_id}', 'present')">
+                                    <label for="present_${student.us_id}">Có mặt</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="attendance-option">
+                                    <input type="checkbox"
+                                           id="excused_${student.us_id}"
+                                           ${student.isExcused ? 'checked' : ''}
+                                           onchange="updateCheckboxState('${student.us_id}', 'excused')">
+                                    <label for="excused_${student.us_id}">Vắng phép</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="attendance-option">
+                                    <input type="checkbox"
+                                           id="absent_${student.us_id}"
+                                           ${student.isAbsent ? 'checked' : ''}
+                                           onchange="updateCheckboxState('${student.us_id}', 'absent')">
+                                    <label for="absent_${student.us_id}">Vắng</label>
+                                </div>
+                            </td>
+                        `;
+                        studentTableBody.appendChild(row);
+                    });
+                }
+                updateAttendanceStats();
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Đã có lỗi xảy ra khi lấy danh sách sinh viên.");
+            });
+
+            modal.style.display = 'block';
+        }
+
+        function updateCheckboxState(studentId, changedField) {
+            students = students.map(s => {
+                if (s.us_id === studentId) {
+                    s.isPresent = false;
+                    s.isExcused = false;
+                    s.isAbsent = false;
+
+                    if (changedField === 'present') {
+                        s.isPresent = document.getElementById(`present_${studentId}`).checked;
+                    } else if (changedField === 'excused') {
+                        s.isExcused = document.getElementById(`excused_${studentId}`).checked;
+                    } else if (changedField === 'absent') {
+                        s.isAbsent = document.getElementById(`absent_${studentId}`).checked;
+                    }
+                    document.getElementById(`present_${studentId}`).checked = s.isPresent;
+                    document.getElementById(`excused_${studentId}`).checked = s.isExcused;
+                    document.getElementById(`absent_${studentId}`).checked = s.isAbsent;
+                }
+                return s;
+            });
+            updateAttendanceStats();
+        }
+
+        function updateAttendanceStats() {
+            const statsDiv = document.getElementById('attendanceStats');
+            let presentCount = 0, excusedCount = 0, absentCount = 0;
+            students.forEach(s => {
+                if (s.isPresent) presentCount++;
+                if (s.isExcused) excusedCount++;
+                if (s.isAbsent) absentCount++;
+            });
+            let notMarkedCount = students.length - (presentCount + excusedCount + absentCount);
+            statsDiv.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${presentCount}</div>
+                    <div class="stat-label">Có mặt</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${excusedCount}</div>
+                    <div class="stat-label">Vắng phép</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${absentCount}</div>
+                    <div class="stat-label">Vắng</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${notMarkedCount}</div>
+                    <div class="stat-label">Chưa đánh dấu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${students.length}</div>
+                    <div class="stat-label">Tổng</div>
+                </div>
+            `;
+        }
+
+        function autoAttendanceAll(type) {
+            students.forEach(s => {
+                s.isPresent = false;
+                s.isExcused = false;
+                s.isAbsent = false;
+
+                if (type === 'present') s.isPresent = true;
+                if (type === 'absent') s.isAbsent = true;
+
+                document.getElementById(`present_${s.us_id}`).checked = s.isPresent;
+                document.getElementById(`excused_${s.us_id}`).checked = s.isExcused;
+                document.getElementById(`absent_${s.us_id}`).checked = s.isAbsent;
+            });
+            updateAttendanceStats();
+        }
+
+        async function saveAttendance() {
+            const scheduleId = currentScheduleId;
+
+            const updates = students
+                .filter(s => s.isPresent || s.isAbsent || s.isExcused)
+                .map(s => ({
+                    user_id: s.us_id,
+                    schedule_id: scheduleId,
+                    isArrive: s.isPresent ? true : (s.isAbsent ? false : null)
+                }));
+
+            if (updates.length === 0) {
+                alert("⚠️ Bạn chưa đánh dấu điểm danh cho sinh viên nào.");
+                return;
+            }
+
+            try {
+                for (const update of updates) {
+                    const response = await fetch(`http://localhost:5243/api/Schedule/UpdateStatusArrive`, {
+                        method: "POST",
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(update)
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok || result.success !== true) {
+                        throw new Error(`❌ Lỗi cập nhật user ${update.user_id}: ${result.message || 'Không rõ lỗi'}`);
+                    }
+                }
+
+                alert("✅ Đã lưu điểm danh cho tất cả học sinh!");
+                closeAttendanceModal();
+            } catch (err) {
+                console.error("Lỗi khi lưu điểm danh:", err);
+                alert("❌ Có lỗi xảy ra khi lưu điểm danh.");
+            }
+        }
+
+        function closeAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'none';
+        }
+
+        function redirectToBetaAi() {
+            if (currentScheduleId) {
+                localStorage.setItem('scheduleId', currentScheduleId);
+                console.log("ScheduleId saved to localStorage:", currentScheduleId);
+            } else {
+                console.error("ScheduleId is undefined!");
+            }
+            closeAttendanceModal();
+            window.location.href = '/Home/BetaAi';
+        }
+
+        function getCurrentDate() {
+            const now = new Date();
+            return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('attendanceModal');
+            if (e.target === modal) {
+                closeAttendanceModal();
+            }
+        };
+
+        /* Hàm cho Lịch Tuần */
+        function calcTopAndHeight(startTime, endTime) {
+            let startMins = startTime.getHours() * 60 + startTime.getMinutes();
+            let endMins = endTime.getHours() * 60 + endTime.getMinutes();
+            let offsetStart = startMins - (startHour * 60);
+            let offsetEnd = endMins - (startHour * 60);
+            let ratioStart = offsetStart / totalMinutes;
+            let ratioEnd = offsetEnd / totalMinutes;
+            let topPx = ratioStart * columnHeight;
+            let heightPx = (ratioEnd - ratioStart) * columnHeight;
+            return { topPx, heightPx };
+        }
+
+        function loadTimeTableForRange(startDate, endDate) {
+            currentStartDate = startDate;
+            currentEndDate = endDate;
+            document.getElementById('currentRange').innerText =
+                `Tuần: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+
+            const userId = localStorage.getItem('userId') || 'fakeUserId';
+            fetch(`http://localhost:5243/api/TimeTableForTeacher/user/${userId}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("TimeTable data:", data);
+                renderSchedule(data);
+                loadUpcomingSchedules(); // Cập nhật upcoming schedules
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Đã có lỗi xảy ra khi gọi API TimeTableForTeacher.");
+            });
+        }
+
+                function renderSchedule(timeTableData) {
+            const columns = document.querySelectorAll('.day-column');
+            columns.forEach(col => {
+                col.querySelectorAll('.schedule-block').forEach(b => b.remove());
+            });
+
+            timeTableData.forEach(item => {
+                const st = new Date(item.startTime);
+                const en = new Date(item.endTime);
+                const day = st.getDay();
+                const column = document.querySelector(`.day-column[data-day="${day}"]`);
+                if (!column) return;
+
+                const { topPx, heightPx } = calcTopAndHeight(st, en);
+                const block = document.createElement('div');
+                block.classList.add('schedule-block');
+
+                // Thêm màu sắc dựa trên tên môn học
+                const colorClass = getColorForSubject(item.subject_Name);
+                block.classList.add(colorClass);
+
+                block.style.top = topPx + 'px';
+                block.style.height = heightPx + 'px';
+
+                block.innerHTML = `
+                    <strong>${item.subject_Name}</strong><br>
+                    Class: ${item.class_Name}<br>
+                    ${item.class_Location}<br>
+                    Students: ${item.schedule_NumStudent}<br>
+                    ${st.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - ${en.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                `;
+
+                if (item.scId) {
+                    block.onclick = () => openAttendanceModal(item.subject_Name, item.scId, item.class_Name);
+                } else {
+                    console.error("ScheduleId undefined for item:", item);
+                }
+                column.appendChild(block);
+            });
+        }
+
+             function loadWeekFromSelectedDate(selectedDateParam) {
+            if (selectedDateParam) {
+                selectedDate = new Date(selectedDateParam);
+            }
+
+            const day = selectedDate.getDay();
+            const diffToMonday = (day + 6) % 7;
+            const startDate = new Date(selectedDate);
+            startDate.setDate(selectedDate.getDate() - diffToMonday);
+            startDate.setHours(0, 0, 0, 0);
+
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 6);
+            endDate.setHours(23, 59, 59, 999);
+
+            loadTimeTableForRange(startDate, endDate);
+        }
+
+        /* Mini Calendar */
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        const monthYearEl = document.getElementById('monthYear');
+        const calendarGrid = document.getElementById('calendarGrid');
+
+        const monthNames = [
+            "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+            "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+        ];
+        const dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+
+               function renderMiniCalendar() {
+            if (!monthYearEl || !calendarGrid) return;
+            calendarGrid.innerHTML = "";
+
+            monthYearEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Render day names
+            dayNames.forEach(d => {
+                const dayNameCell = document.createElement('div');
+                dayNameCell.classList.add('day-name');
+                dayNameCell.textContent = d;
+                calendarGrid.appendChild(dayNameCell);
+            });
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+            let offset = (firstDay + 6) % 7;
+
+            // Render previous month's trailing dates
+            for (let i = offset - 1; i >= 0; i--) {
+                const prevDate = daysInPrevMonth - i;
+                const dateCell = document.createElement('div');
+                dateCell.classList.add('date-cell', 'other-month');
+                dateCell.textContent = prevDate;
+                dateCell.onclick = () => {
+                    // Chuyển về tháng trước và chọn ngày đó
+                    const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+                    const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+                    const selected = new Date(prevYear, prevMonth, prevDate);
+                    selectedDate = selected;
+                    currentMonth = prevMonth;
+                    currentYear = prevYear;
+                    renderMiniCalendar();
+                    loadWeekFromSelectedDate(selected);
+                };
+                calendarGrid.appendChild(dateCell);
+            }
+
+            const today = new Date();
+            // Render current month dates
+            for (let date = 1; date <= daysInMonth; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.classList.add('date-cell');
+                dateCell.textContent = date;
+
+                // Check if this is today
+                if (date === today.getDate() &&
+                    currentMonth === today.getMonth() &&
+                    currentYear === today.getFullYear()) {
+                    dateCell.classList.add('today');
+                }
+
+                // Check if this is selected date
+                if (date === selectedDate.getDate() &&
+                    currentMonth === selectedDate.getMonth() &&
+                    currentYear === selectedDate.getFullYear()) {
+                    dateCell.classList.add('selected');
+                }
+
+                dateCell.onclick = () => {
+                    const selected = new Date(currentYear, currentMonth, date);
+                    selectedDate = selected;
+                    renderMiniCalendar(); // Re-render to update selected styling
+                    loadWeekFromSelectedDate(selected);
+                };
+                calendarGrid.appendChild(dateCell);
+            }
+
+            // Render next month's leading dates to fill the grid
+            const totalCells = calendarGrid.children.length - 7; // Subtract day names
+            const remainingCells = 42 - totalCells - 7; // 6 rows * 7 days - day names
+            for (let date = 1; date <= remainingCells && totalCells < 35; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.classList.add('date-cell', 'other-month');
+                dateCell.textContent = date;
+                dateCell.onclick = () => {
+                    // Chuyển sang tháng sau và chọn ngày đó
+                    const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+                    const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+                    const selected = new Date(nextYear, nextMonth, date);
+                    selectedDate = selected;
+                    currentMonth = nextMonth;
+                    currentYear = nextYear;
+                    renderMiniCalendar();
+                    loadWeekFromSelectedDate(selected);
+                };
+                calendarGrid.appendChild(dateCell);
+            }
+        }
+
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderMiniCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderMiniCalendar();
+        }
+                const availableColors = [
+            'color-1', 'color-2', 'color-3', 'color-4', 'color-5',
+            'color-6', 'color-7', 'color-8', 'color-9', 'color-10'
+        ];
+                let subjectColors = JSON.parse(localStorage.getItem('subjectColors')) || {};
+
+        // Hàm lấy màu cho môn học
+        function getColorForSubject(subjectName) {
+            if (!subjectColors[subjectName]) {
+                // Lấy màu random chưa được sử dụng hoặc ít được sử dụng nhất
+                const usedColors = Object.values(subjectColors);
+                const unusedColors = availableColors.filter(color => !usedColors.includes(color));
+
+                if (unusedColors.length > 0) {
+                    subjectColors[subjectName] = unusedColors[Math.floor(Math.random() * unusedColors.length)];
+                } else {
+                    // Nếu hết màu, chọn random
+                    subjectColors[subjectName] = availableColors[Math.floor(Math.random() * availableColors.length)];
+                }
+
+                // Lưu vào localStorage
+                localStorage.setItem('subjectColors', JSON.stringify(subjectColors));
+            }
+
+            return subjectColors[subjectName];
+        }
+
+        // Biến lưu ngày được chọn
+        let selectedDate = new Date();
+        /* Upcoming Schedules */
+        function loadUpcomingSchedules() {
+            const upcomingList = document.getElementById('upcomingSchedulesList');
+            if (!upcomingList) return;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const userId = localStorage.getItem('userId') || 'fakeUserId';
+            fetch(`http://localhost:5243/api/TimeTableForTeacher/user/${userId}?startDate=${today.toISOString()}&endDate=${new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString()}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                upcomingList.innerHTML = '';
+                data.filter(item => new Date(item.startTime) > today).forEach(item => {
+                    const st = new Date(item.startTime);
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('schedule-item');
+                    itemDiv.innerHTML = `
+                        <span>${item.subject_Name} - ${item.class_Name}</span>
+                        <span class="schedule-time">${st.toLocaleTimeString()}</span>
+                    `;
+                    if (item.scId) {
+                        itemDiv.onclick = () => openAttendanceModal(item.subject_Name, item.scId, item.class_Name);
+                    }
+                    upcomingList.appendChild(itemDiv);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Đã có lỗi xảy ra khi lấy danh sách lịch sắp tới.");
+            });
+        }
+    </script>
+}

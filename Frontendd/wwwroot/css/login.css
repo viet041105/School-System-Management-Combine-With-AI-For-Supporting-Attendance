@@ -1,0 +1,240 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body: gradient động - ĐÃ THAY ĐỔI GRADIENT THÀNH EAE0C8 VÀ A1C6E3 */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #EAE0C8, #A1C6E3);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Wrapper chia đôi - ĐÃ TĂNG HEIGHT THÀNH 90VH VÀ THAY ĐỔI FLEX RATIO */
+.auth-wrapper {
+    width: 95vw;
+    max-width: none;
+    height: 92vh; /* TĂNG HEIGHT TỪ 80VH LÊN 90VH */
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    display: flex;
+    overflow: hidden;
+}
+
+/* Bên trái: login - ĐÃ GIẢM FLEX TỪ 1 XUỐNG 0.6 ĐỂ SCALE NHỎ HƠN */
+.auth-left {
+    flex: 0.65; /* GIẢM TỪ flex: 1 XUỐNG flex: 0.6 ĐỂ LOGIN SCALE NHỎ HƠN */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fafafa;
+    position: relative;
+}
+
+    .auth-left::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, #4776E6, #8E54E9);
+    }
+
+    /* Tiêu đề */
+    .auth-left h2 {
+        font-size: 2rem;
+        color: #1a202c;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+/* Form */
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    position: relative;
+}
+
+    .input-group input {
+        width: 100%;
+        padding: 14px 45px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        background: #f8fafc;
+        transition: all 0.25s ease;
+    }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
+            background: #fff;
+        }
+
+    .input-group .icon-left,
+    .input-group .password-toggle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #718096;
+    }
+
+    .input-group .icon-left {
+        left: 14px;
+    }
+
+    .input-group .password-toggle {
+        right: 14px;
+        cursor: pointer;
+    }
+
+.error-message {
+    display: none;
+    color: #e53e3e;
+    font-size: 0.8rem;
+    margin-top: 6px;
+    padding-left: 12px;
+}
+
+.input-group.error input {
+    border-color: #e53e3e;
+    background: #fff8f8;
+}
+
+.input-group.error .icon-left {
+    color: #e53e3e;
+}
+
+.input-group.error .error-message {
+    display: block;
+}
+
+/* Button */
+.btn-login {
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+    transition: all 0.3s ease;
+}
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(99,102,241,0.3);
+    }
+
+    .btn-login:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 8px rgba(99,102,241,0.25);
+    }
+
+    .btn-login .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top: 2px solid #fff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    .btn-login.loading .spinner {
+        display: inline-block;
+    }
+
+    .btn-login.loading span {
+        display: none;
+    }
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Toggle text dưới form */
+.toggle-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.toggle-form {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .toggle-form:hover {
+        text-decoration: underline;
+    }
+
+/* Thông báo */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Bên phải: hình ảnh - ĐÃ TĂNG FLEX TỪ 1 LÊN 1.4 ĐỂ ẢNH TO HƠN */
+.auth-right {
+    flex: 2.0; /* TĂNG TỪ flex: 1 LÊN flex: 1.4 ĐỂ ẢNH TO HƠN */
+    background: url('/img/LG3.png') center center / cover no-repeat;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-wrapper {
+        flex-direction: column;
+        height: auto;
+        width: 95vw;
+    }
+
+    .auth-right {
+        display: none;
+    }
+}

@@ -1,0 +1,389 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Thời khóa biểu của tôi";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/timetable.css" asp-append-version="true" />
+    <style>
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .attendance-table th {
+            background-color: #f2f2f2;
+        }
+
+        .attendance-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .attendance-action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .attendance-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        #modalTitle {
+            position: relative;
+        }
+
+        #statusDisplay {
+            border: 2px solid #2c3e50;
+            border-radius: 6px;
+            background-color: #ecf0f1;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+
+    </style>
+}
+
+<!-- Layout chính -->
+<div class="main-layout">
+    <!-- Lịch tuần (Thời khóa biểu) -->
+    <div class="schedule-wrapper">
+        <div class="schedule-header">
+            <h2>Thời khóa biểu của tôi</h2>
+        </div>
+        <div id="currentRange" class="range-info"></div>
+        <div class="timetable-scroll-container">
+            <div class="time-column">
+                @for (int hour = 7; hour <= 20; hour++)
+                {
+                    <div class="time-label">@hour:00</div>
+                }
+            </div>
+            <div id="scheduleContainer" class="schedule-container">
+                @{
+                    int[] dayIndices = { 1, 2, 3, 4, 5, 6, 0 };
+                    string[] dayNames = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                    for (int i = 0; i < 7; i++)
+                    {
+                        <div class="day-column" data-day="@dayIndices[i]">
+                            <div class="day-header">@dayNames[i]</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Cột phải chứa lịch tháng và thống kê -->
+    <div class="right-column">
+        <!-- Mini Calendar -->
+        <div class="calendar-box">
+            <h3>Lịch tháng</h3>
+            <div class="calendar-header">
+                <button onclick="prevMonth()"><</button>
+                <div id="monthYear" class="month-year"></div>
+                <button onclick="nextMonth()">></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Render bằng JS -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal điểm danh môn học dành cho student -->
+<div id="attendanceModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <!-- Tiêu đề modal hiển thị môn học, ngày và trạng thái điểm danh -->
+        <h3 id="modalTitle"><span id="subjectName"></span> - <span id="dateDisplay"></span> - <span id="statusDisplay"></span></h3>
+        <!-- Bảng 2 cột: STT và Tên Học sinh -->
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Học sinh</th>
+                </tr>
+            </thead>
+            <tbody id="attendanceTableBody">
+                <!-- Dữ liệu học sinh được load động -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let currentStartDate, currentEndDate;
+        const startHour = 7;
+        const endHour = 20;
+        const totalMinutes = (endHour - startHour) * 60;
+        const columnHeight = 60 * (endHour - startHour);
+
+        const modal = document.getElementById('attendanceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeModal = document.querySelector('.close-modal');
+        const subjectNameDisplay = document.getElementById('subjectName');
+        const dateDisplay = document.getElementById('dateDisplay');
+        const statusDisplay = document.getElementById('statusDisplay');
+
+        // Dữ liệu mẫu của học sinh
+        const sampleStudents = [
+            { id: 1, fullName: 'Student One' },
+            { id: 2, fullName: 'Student Two' },
+            { id: 3, fullName: 'Student Three' }
+        ];
+
+        // Các thống kê (nếu cần)
+        let totalStats = { present: 0, absent: 0, notYet: 0 };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMiniCalendar();
+            const today = new Date();
+            loadWeekFromSelectedDate(today);
+
+            if (closeModal) {
+                closeModal.onclick = () => modal.style.display = "none";
+            }
+
+            window.onclick = event => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+
+        function calcTopAndHeight(startTime, endTime) {
+            let startMins = startTime.getHours() * 60 + startTime.getMinutes();
+            let endMins   = endTime.getHours() * 60 + endTime.getMinutes();
+            let offsetStart = startMins - (startHour * 60);
+            let offsetEnd   = endMins - (startHour * 60);
+            let ratioStart = offsetStart / totalMinutes;
+            let ratioEnd   = offsetEnd / totalMinutes;
+            let topPx = ratioStart * columnHeight;
+            let heightPx = (ratioEnd - ratioStart) * columnHeight;
+            return { topPx, heightPx };
+        }
+
+        function loadTimeTableForRange(startDate, endDate) {
+            currentStartDate = startDate;
+            currentEndDate = endDate;
+            document.getElementById('currentRange').innerText =
+                `Tuần: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+            const userId = localStorage.getItem('userId') || 'fakeUserId';
+            fetch(`http://localhost:5243/api/TimeTableForStudent/student/${userId}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("TimeTable data:", data);
+                renderSchedule(data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Đã có lỗi xảy ra khi gọi API TimeTable.");
+            });
+        }
+
+        function renderSchedule(timeTableData) {
+            const columns = document.querySelectorAll('.day-column');
+            columns.forEach(col => {
+                col.querySelectorAll('.schedule-block').forEach(b => b.remove());
+            });
+
+            // Khởi tạo biến đếm
+            let presentCount = 0;
+            let absentCount = 0;
+            let notYetCount = 0;
+
+            timeTableData.forEach(item => {
+                const st = new Date(item.startTime);
+                const en = new Date(item.endTime);
+                const day = st.getDay();
+                const column = document.querySelector(`.day-column[data-day="${day}"]`);
+                if (!column) return;
+
+                const { topPx, heightPx } = calcTopAndHeight(st, en);
+                const block = document.createElement('div');
+                block.classList.add('schedule-block');
+                block.style.top = topPx + 'px';
+                block.style.height = heightPx + 'px';
+
+                // Tính trạng thái điểm danh và tăng biến đếm
+                let status = "";
+                if (en < new Date()) {
+                    if (item.isArrive === true) {
+                        status = "Có mặt";
+                    } else if (item.isArrive === false) {
+                        status = "Vắng mặt";
+                    } else {
+                        status = "Chưa điểm danh";
+                    }
+                } else {
+                    status = "Chưa học";
+                }
+
+                block.innerHTML = `
+                    <div class="block-content">
+                        <div class="block-info">
+                            <strong>${item.subject_Name}</strong><br>
+                            ${item.class_Location}<br>
+                            ${st.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            -
+                            ${en.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                    </div>
+                `;
+
+                block.addEventListener('click', function() {
+                    showAttendanceModalForStudent(item, st, status);
+                });
+
+                column.appendChild(block);
+            });
+        }
+
+                function showAttendanceModalForStudent(item, lectureDate, status) {
+            if (!modal) return;
+
+
+            document.getElementById('modalTitle').innerHTML = `
+                <div class="modal-header-content">
+                    Subject <span id="subjectName">${item.subject_Name}</span> -
+                    <span id="dateDisplay">${lectureDate.toLocaleDateString()}</span>
+                </div>
+                <span id="statusDisplay"> Trạng thái: ${status}</span>
+            `;
+
+            const tableBody = document.getElementById('attendanceTableBody');
+            tableBody.innerHTML = '';
+
+            // Gọi API lấy danh sách học sinh
+            fetch(`http://localhost:5243/api/TimeTableForStudent/schedule/${item.scId}/students`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach((student, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${student.fullName}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="2">Không có dữ liệu học sinh.</td></tr>`;
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                tableBody.innerHTML = `<tr><td colspan="2">Lỗi khi tải dữ liệu học sinh.</td></tr>`;
+            });
+
+            modal.style.display = "block";
+        }
+
+
+        function renderMiniCalendar() {
+            const monthYearEl = document.getElementById('monthYear');
+            const calendarGrid = document.getElementById('calendarGrid');
+            if (!monthYearEl || !calendarGrid) return;
+            calendarGrid.innerHTML = "";
+            const monthNames = [
+                "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+                "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+            ];
+            const dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+            let currentMonth = new Date().getMonth();
+            let currentYear = new Date().getFullYear();
+            monthYearEl.textContent = `${monthNames[currentMonth]} - ${currentYear}`;
+            dayNames.forEach(d => {
+                const dayNameCell = document.createElement('div');
+                dayNameCell.classList.add('day-name');
+                dayNameCell.textContent = d;
+                calendarGrid.appendChild(dayNameCell);
+            });
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            let offset = (firstDay + 6) % 7;
+            for (let i = 0; i < offset; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('date-cell');
+                calendarGrid.appendChild(emptyCell);
+            }
+            const today = new Date();
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateCell = document.createElement('div');
+                dateCell.classList.add('date-cell');
+                dateCell.textContent = d;
+                if (d === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    dateCell.classList.add('today');
+                }
+                dateCell.onclick = () => {
+                    const selected = new Date(currentYear, currentMonth, d);
+                    loadWeekFromSelectedDate(selected);
+                    document.querySelectorAll('.date-cell').forEach(cell => cell.classList.remove('selected'));
+                    dateCell.classList.add('selected');
+                };
+                calendarGrid.appendChild(dateCell);
+            }
+        }
+
+        function loadWeekFromSelectedDate(selectedDate) {
+            const day = selectedDate.getDay();
+            const diffToMonday = (day + 6) % 7;
+            const startDate = new Date(selectedDate);
+            startDate.setDate(selectedDate.getDate() - diffToMonday);
+            startDate.setHours(0, 0, 0, 0);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 6);
+            endDate.setHours(23, 59, 59, 999);
+            loadTimeTableForRange(startDate, endDate);
+        }
+
+        function loadTimeTableForRange(startDate, endDate) {
+            currentStartDate = startDate;
+            currentEndDate = endDate;
+            document.getElementById('currentRange').innerText =
+                `Tuần: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+            const userId = localStorage.getItem('userId') || 'fakeUserId';
+            fetch(`http://localhost:5243/api/TimeTableForStudent/student/${userId}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("TimeTable data:", data);
+                renderSchedule(data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Đã có lỗi xảy ra khi gọi API TimeTable.");
+            });
+        }
+    </script>
+}

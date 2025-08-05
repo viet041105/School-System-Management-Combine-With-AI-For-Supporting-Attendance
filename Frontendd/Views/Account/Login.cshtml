@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout_Empty.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/login.css" />
+
+<div class="auth-wrapper">
+    <!-- Bên trái: Form đăng nhập -->
+    <div class="auth-left">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <i class="fas fa-user icon-left"></i>
+                <input type="text" id="username" name="username" placeholder="Tên đăng nhập hoặc email" />
+                <div class="error-message">Vui lòng nhập tên đăng nhập</div>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock icon-left"></i>
+                <input type="password" id="password" name="password" placeholder="Mật khẩu" />
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                <div class="error-message">Vui lòng nhập mật khẩu</div>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <div class="spinner"></div>
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Đăng Nhập</span>
+            </button>
+        </form>
+
+        <p class="toggle-text">
+            Chưa có tài khoản?
+            <a asp-controller="Account" asp-action="Register" class="toggle-form">Đăng ký ngay</a>
+        </p>
+    </div>
+
+    <!-- Bên phải: Hình ảnh -->
+    <div class="auth-right"></div>
+</div>
+
+<!-- Container thông báo -->
+<div class="notification-container" id="notificationContainer"></div>
+
+@section Scripts {
+    <script>
+        // Hiển thị thông báo
+        function showNotification(message, type = 'success', duration = 4000) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+
+            const content = document.createElement('div');
+            content.className = 'notification-content';
+
+            const icon = document.createElement('i');
+            icon.className = type === 'success'
+                ? 'fas fa-check-circle notification-icon'
+                : 'fas fa-exclamation-circle notification-icon';
+            content.appendChild(icon);
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'notification-message';
+            messageDiv.textContent = message;
+            content.appendChild(messageDiv);
+
+            notification.appendChild(content);
+
+            const closeBtn = document.createElement('span');
+            closeBtn.innerHTML = '×';
+            closeBtn.className = 'notification-close';
+            closeBtn.onclick = () => closeNotification(notification);
+            notification.appendChild(closeBtn);
+
+            container.appendChild(notification);
+
+            if (duration) {
+                setTimeout(() => closeNotification(notification), duration);
+            }
+        }
+
+        function closeNotification(notification) {
+            if (notification.parentNode) {
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }
+        }
+
+        function setButtonLoading(isLoading) {
+            const btn = document.querySelector('.btn-login');
+            if (isLoading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Khởi tạo container thông báo nếu chưa có
+            if (!document.getElementById('notificationContainer')) {
+                const nc = document.createElement('div');
+                nc.id = 'notificationContainer';
+                nc.className = 'notification-container';
+                document.body.appendChild(nc);
+            }
+
+            // Toggle password
+            const togglePwd = document.getElementById('togglePassword');
+            const pwdInput = document.getElementById('password');
+            if (togglePwd && pwdInput) {
+                togglePwd.addEventListener('click', () => {
+                    const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    pwdInput.setAttribute('type', type);
+                    togglePwd.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // Validation input real-time
+            document.querySelectorAll('#loginForm input').forEach(inp => {
+                inp.addEventListener('input', () => inp.parentElement.classList.remove('error'));
+            });
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const u = document.getElementById('username'),
+                  p = document.getElementById('password');
+
+            // Xóa lỗi cũ
+            document.querySelectorAll('.input-group').forEach(g => g.classList.remove('error'));
+
+            let valid = true;
+            if (!u.value.trim()) { u.parentElement.classList.add('error'); valid = false; }
+            if (!p.value.trim()) { p.parentElement.classList.add('error'); valid = false; }
+            if (!valid) return;
+
+            setButtonLoading(true);
+
+            const payload = { UsernameOrEmail: u.value.trim(), Password: p.value };
+            try {
+                const res = await fetch('http://localhost:5243/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                setButtonLoading(false);
+
+                if (!res.ok) {
+                    showNotification(data.message || 'Đăng nhập thất bại!', 'error');
+                } else {
+                    showNotification(data.message || 'Đăng nhập thành công!', 'success', 2000);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userRole', data.userRole);
+
+                    setTimeout(() => {
+                        if (data.userRole === 'student' || data.userRole === 'teacher') {
+                            window.location.href = '/Home/Index';
+                        } else {
+                            window.location.href = '/School/Index';
+                        }
+                    }, 1500);
+                }
+            } catch (err) {
+                console.error(err);
+                setButtonLoading(false);
+                showNotification('Lỗi kết nối máy chủ, thử lại sau.', 'error');
+            }
+        });
+    </script>
+}

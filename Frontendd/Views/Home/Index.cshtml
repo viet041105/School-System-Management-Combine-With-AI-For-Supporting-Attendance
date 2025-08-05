@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Overview";
+}
+
+<!-- Div chào mừng cho học sinh -->
+<div id="student-welcome" class="welcome-message" style="display: none;">
+    <h1>Welcome to Student Portal</h1>
+    <p>Every genius once struggled 😎</p>
+</div>
+
+<!-- Div chào mừng cho giáo viên -->
+<div id="teacher-welcome" class="welcome-message" style="display: none;">
+    <h1>Welcome to Teacher Portal</h1>
+    <p>Teaching is the greatest act of optimism 😀</p>
+</div>
+<script>
+        $(document).ready(function() {
+        // Lấy role từ localStorage
+        var user_role = window.localStorage.getItem("userRole");
+        console.log("Current user role:", user_role);
+
+        // Hiển thị welcome message tương ứng dựa trên role
+        if (user_role == "teacher") {
+            $("#teacher-welcome").show();
+            $("#student-welcome").hide();
+        }
+        else if (user_role == "student") {
+            $("#student-welcome").show();
+            $("#teacher-welcome").hide();
+        }
+        else {
+            // Trường hợp mặc định nếu không xác định được role
+            // Có thể hiển thị thông báo mặc định hoặc dùng student view
+            $("#student-welcome").show();
+            $("#teacher-welcome").hide();
+        }
+    })
+</script>

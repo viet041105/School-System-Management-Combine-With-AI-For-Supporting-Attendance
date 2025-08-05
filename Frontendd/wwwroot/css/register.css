@@ -1,0 +1,163 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Reset & font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body background gradient, căn giữa nội dung */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Để có thể cuộn nếu nội dung quá cao */
+    background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff758c, #ff7eb3);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Container chính cho form đăng ký */
+.register-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tiêu đề */
+.register-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Input group */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+        .input-group input:focus {
+            border-color: #ff7eb3; /* Có thể đổi sang #0072ff nếu muốn xanh */
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 118, 179, 0.4);
+        }
+
+    /* Trạng thái lỗi */
+    .input-group.error input {
+        border-color: #ff3333;
+    }
+
+.error-message {
+    color: #ff3333;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.input-group.error .error-message {
+    display: block;
+}
+
+/* Icon phía trái */
+.input-group i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 16px;
+}
+
+/* Nút Đăng Ký */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Nút đăng ký hồng */
+.btn-register {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(255, 118, 179, 0.3);
+}
+
+    .btn-register:hover {
+        background: linear-gradient(to right, #d64980, #ff5678);
+        box-shadow: 0 8px 20px rgba(255, 118, 179, 0.5);
+    }
+
+    .btn-register i {
+        font-size: 20px;
+    }
+
+/* Chuyển sang trang Login */
+.toggle-text {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 15px;
+    color: #333;
+}
+
+.toggle-form {
+    color: #0072ff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .toggle-form:hover {
+        color: #0052d4;
+    }

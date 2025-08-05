@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "About";
+}
+
+<div class="contact-content">
+    <h2 class="contact-title">Liên Hệ Với Chúng Tôi</h2>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Họ và tên</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Nội dung tin nhắn</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" onclick="submitMessage()">Gửi tin nhắn</button>
+        </form>
+
+
+        <!-- Contact List -->
+
+        <h3 class="contact-list-title">Danh sách liên hệ</h3>
+        <div class="contact-card">
+            <h4>Hà Khánh </h4>
+            <p class="contact-info"><i class="fas fa-phone"></i>0775112005 </p>
+            <p class="contact-info"><i class="fas fa-envelope"></i>hakhanh699669@gmail.com </p>
+        </div>
+        <div class="contact-card">
+            <h4>Phùng Văn Linh </h4>
+            <p class="contact-info"><i class="fas fa-phone"></i>0347614676 </p>
+            <p class="contact-info"><i class="fas fa-envelope"></i>linhp3553@gmail.com </p>
+        </div>
+        <div class="contact-card">
+            <h4>Phạm Gia Bảo </h4>
+            <p class="contact-info"><i class="fas fa-phone"></i>0965952822 </p>
+            <p class="contact-info"><i class="fas fa-envelope"></i>BaoPham0906091@gmail.com </p>
+        </div>
+        <div class="contact-card">
+            <h4>Đinh Quốc Việt </h4>
+            <p class="contact-info"><i class="fas fa-phone"></i>0337565155</p>
+            <p class="contact-info"><i class="fas fa-envelope"></i>dinhquocviet0411@gmail.com </p>
+        </div>
+        <div class="contact-card">
+            <h4>Lê Tuấn Linh </h4>
+            <p class="contact-info"><i class="fas fa-phone"></i>0335514047</p>
+            <p class="contact-info"><i class="fas fa-envelope"></i>gsreddevil119@gmail.com</p>
+        </div>
+    </div>
+</div>
